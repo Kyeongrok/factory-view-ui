@@ -6,11 +6,85 @@
         xmlns:controls="clr-namespace:WpfLol.Controls"
         xmlns:types="clr-namespace:WpfLol.Types"
         mc:Ignorable="d"
-        Background="#191919"
-        Title="RoundButton Demo" Height="450" Width="800">
+        Background="#1F303A"
+        Title="FactoryViewUI Controls Demo" Height="550" Width="900">
     <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
-            <TextBlock Text="RoundButton Demo (from FactoryViewUI)"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- MenuButton Demo (Top Menu Bar) -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Background="#1F303A">
+            <controls:MenuButton Content="System" MenuType="System" IsActive="True">
+                <controls:MenuButton.Icon>
+                    <TextBlock Text="⚙" FontSize="24" Foreground="#B9C2D3"/>
+                </controls:MenuButton.Icon>
+                <controls:MenuButton.ActiveIcon>
+                    <TextBlock Text="⚙" FontSize="24" Foreground="White"/>
+                </controls:MenuButton.ActiveIcon>
+            </controls:MenuButton>
+            <controls:MenuButton Content="Production" MenuType="Production">
+                <controls:MenuButton.Icon>
+                    <TextBlock Text="�icing" FontSize="24" Foreground="#B9C2D3"/>
+                </controls:MenuButton.Icon>
+                <controls:MenuButton.ActiveIcon>
+                    <TextBlock Text="🏭" FontSize="24" Foreground="White"/>
+                </controls:MenuButton.ActiveIcon>
+            </controls:MenuButton>
+            <controls:MenuButton Content="Quality" MenuType="Quality">
+                <controls:MenuButton.Icon>
+                    <TextBlock Text="✓" FontSize="24" Foreground="#B9C2D3"/>
+                </controls:MenuButton.Icon>
+                <controls:MenuButton.ActiveIcon>
+                    <TextBlock Text="✓" FontSize="24" Foreground="White"/>
+                </controls:MenuButton.ActiveIcon>
+            </controls:MenuButton>
+            <controls:MenuButton Content="Material" MenuType="Material">
+                <controls:MenuButton.Icon>
+                    <TextBlock Text="📦" FontSize="24" Foreground="#B9C2D3"/>
+                </controls:MenuButton.Icon>
+                <controls:MenuButton.ActiveIcon>
+                    <TextBlock Text="📦" FontSize="24" Foreground="White"/>
+                </controls:MenuButton.ActiveIcon>
+            </controls:MenuButton>
+            <controls:MenuButton Content="Purchase" MenuType="Purchase">
+                <controls:MenuButton.Icon>
+                    <TextBlock Text="🛒" FontSize="24" Foreground="#B9C2D3"/>
+                </controls:MenuButton.Icon>
+                <controls:MenuButton.ActiveIcon>
+                    <TextBlock Text="🛒" FontSize="24" Foreground="White"/>
+                </controls:MenuButton.ActiveIcon>
+            </controls:MenuButton>
+            <controls:MenuButton Content="Equipment" MenuType="Equipment">
+                <controls:MenuButton.Icon>
+                    <TextBlock Text="🔧" FontSize="24" Foreground="#B9C2D3"/>
+                </controls:MenuButton.Icon>
+                <controls:MenuButton.ActiveIcon>
+                    <TextBlock Text="🔧" FontSize="24" Foreground="White"/>
+                </controls:MenuButton.ActiveIcon>
+            </controls:MenuButton>
+            <controls:MenuButton Content="Sales" MenuType="Sales">
+                <controls:MenuButton.Icon>
+                    <TextBlock Text="💰" FontSize="24" Foreground="#B9C2D3"/>
+                </controls:MenuButton.Icon>
+                <controls:MenuButton.ActiveIcon>
+                    <TextBlock Text="💰" FontSize="24" Foreground="White"/>
+                </controls:MenuButton.ActiveIcon>
+            </controls:MenuButton>
+            <controls:MenuButton Content="Master" MenuType="Master">
+                <controls:MenuButton.Icon>
+                    <TextBlock Text="📋" FontSize="24" Foreground="#B9C2D3"/>
+                </controls:MenuButton.Icon>
+                <controls:MenuButton.ActiveIcon>
+                    <TextBlock Text="📋" FontSize="24" Foreground="White"/>
+                </controls:MenuButton.ActiveIcon>
+            </controls:MenuButton>
+        </StackPanel>
+
+        <!-- RoundButton Demo -->
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+            <TextBlock Text="RoundButton Demo"
                        Foreground="White" FontSize="18" FontWeight="Bold"
                        HorizontalAlignment="Center" Margin="0,0,0,30"/>
 

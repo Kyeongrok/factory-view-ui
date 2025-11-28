@@ -48,4 +48,90 @@
         </Setter>
     </Style>
 
+    <!-- MenuButton Style -->
+    <Style TargetType="{x:Type controls:MenuButton}">
+        <Setter Property="Width" Value="78"/>
+        <Setter Property="Height" Value="78"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:MenuButton}">
+                    <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="True">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- Icon Area -->
+                            <ContentPresenter x:Name="iconPresenter"
+                                              Grid.Row="0"
+                                              Content="{TemplateBinding Icon}"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              Margin="0,10,0,0"/>
+
+                            <!-- Active Icon (hidden by default) -->
+                            <ContentPresenter x:Name="activeIconPresenter"
+                                              Grid.Row="0"
+                                              Content="{TemplateBinding ActiveIcon}"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              Margin="0,10,0,0"
+                                              Visibility="Collapsed"/>
+
+                            <!-- Text -->
+                            <TextBlock x:Name="textBlock"
+                                       Grid.Row="1"
+                                       Text="{TemplateBinding Content}"
+                                       Foreground="{TemplateBinding Foreground}"
+                                       FontSize="{TemplateBinding FontSize}"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Margin="0,5,0,10"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <!-- Hover State -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background"
+                                    Value="{Binding HoverBackground, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Setter TargetName="textBlock" Property="Foreground"
+                                    Value="{Binding ActiveForeground, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Setter TargetName="iconPresenter" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="activeIconPresenter" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <!-- Active State -->
+                        <Trigger Property="IsActive" Value="True">
+                            <Setter TargetName="border" Property="Background"
+                                    Value="{Binding ActiveBackground, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Setter TargetName="textBlock" Property="Foreground"
+                                    Value="{Binding ActiveForeground, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Setter TargetName="iconPresenter" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="activeIconPresenter" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <!-- Pressed State -->
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="border" Property="Background"
+                                    Value="{Binding ActiveBackground, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        </Trigger>
+                        <!-- Disabled State -->
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="border" Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

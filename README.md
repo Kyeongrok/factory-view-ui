@@ -7,12 +7,14 @@ FactoryViewUI.dll의 컨트롤들을 WPF로 포팅하는 프로젝트입니다.
 ```
 WpfLol/
 ├── Controls/
-│   └── RoundButton.cs        # WPF용 RoundButton 컨트롤
+│   ├── RoundButton.cs        # WPF용 RoundButton 컨트롤
+│   └── MenuButton.cs         # WPF용 MenuButton 컨트롤
 ├── Types/
 │   ├── ColorType.cs          # Blue, Orange, Green, Black, White
-│   └── ButtonIconType.cs     # 아이콘 타입 (향후 확장용)
+│   ├── ButtonIconType.cs     # 버튼 아이콘 타입
+│   └── MenuType.cs           # 메뉴 타입 (System, Production, Quality 등)
 ├── Themes/
-│   └── Generic.xaml          # 버튼 스타일/템플릿
+│   └── Generic.xaml          # 컨트롤 스타일/템플릿
 └── MainWindow.xaml           # 데모 화면
 ```
 
@@ -61,6 +63,58 @@ xmlns:controls="clr-namespace:WpfLol.Controls"
 | Black | `#354856` | `#27353F` |
 | White | `#FFFFFF` | `#D3D3D3` |
 
+---
+
+### MenuButton
+
+FactoryViewUI의 `MenuButton`을 WPF용으로 포팅한 컨트롤입니다. 상단 메뉴바에서 사용됩니다.
+
+#### 사용법
+
+```xml
+<controls:MenuButton Content="System" MenuType="System" IsActive="True">
+    <controls:MenuButton.Icon>
+        <TextBlock Text="⚙" FontSize="24" Foreground="#B9C2D3"/>
+    </controls:MenuButton.Icon>
+    <controls:MenuButton.ActiveIcon>
+        <TextBlock Text="⚙" FontSize="24" Foreground="White"/>
+    </controls:MenuButton.ActiveIcon>
+</controls:MenuButton>
+```
+
+#### 속성
+
+| 속성 | 타입 | 기본값 | 설명 |
+|------|------|--------|------|
+| `MenuType` | `MenuType` | `System` | 메뉴 타입 |
+| `IsActive` | `bool` | `false` | 활성화 상태 |
+| `Icon` | `object` | `null` | 비활성 상태 아이콘 |
+| `ActiveIcon` | `object` | `null` | 활성 상태 아이콘 |
+
+#### MenuType 종류
+
+| 주요 타입 | 설명 |
+|----------|------|
+| `System` | 시스템 |
+| `Production` | 생산 |
+| `Quality` | 품질 |
+| `Material` | 자재 |
+| `Purchase` | 구매 |
+| `Equipment` | 설비 |
+| `Sales` | 영업 |
+| `Master` | 기준정보 |
+| `Outsourcing` | 외주 |
+| `Tool` | 공구 |
+
+#### 색상
+
+| 상태 | 배경색 | 글자색 |
+|------|--------|--------|
+| Normal | `#1F303A` | `#B9C2D3` |
+| Hover/Active | `#13437C` | `#FFFFFF` |
+
+---
+
 ## 빌드 및 실행
 
 ```bash
@@ -81,6 +135,6 @@ dotnet run --project WpfLol/WpfLol.csproj
 ## 향후 계획
 
 - [ ] ButtonIcon 지원 (아이콘 + 텍스트)
-- [ ] MenuButton 포팅
+- [x] MenuButton 포팅
 - [ ] LabelTextEdit 등 LabelValueControl 포팅
 - [ ] FvGridControl 포팅
