@@ -11,6 +11,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -82,8 +84,41 @@
             </controls:MenuButton>
         </StackPanel>
 
+        <!-- MenuLabelControl Demo (중메뉴) -->
+        <Border Grid.Row="1" Background="#010A13" BorderBrush="#553D4143" BorderThickness="0,1">
+            <StackPanel Orientation="Horizontal">
+                <controls:MenuLabelControl Content="사용자 관리"/>
+                <controls:MenuLabelControl Content="권한 관리"/>
+                <controls:MenuLabelControl Content="메뉴 관리"/>
+                <controls:MenuLabelControl Content="코드 관리"/>
+                <controls:MenuLabelControl Content="시스템 설정"/>
+            </StackPanel>
+        </Border>
+
+        <!-- MenuPanel with MenuLabel Demo (소메뉴 드롭다운) -->
+        <controls:MenuPanel Grid.Row="2" IsOpen="True" Padding="10">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Width="150">
+                    <controls:MenuLabel Content="사용자 등록"/>
+                    <controls:MenuLabel Content="사용자 조회"/>
+                    <controls:MenuLabel Content="사용자 수정"/>
+                    <controls:MenuLabel Content="비밀번호 초기화"/>
+                </StackPanel>
+                <StackPanel Width="150">
+                    <controls:MenuLabel Content="권한 등록"/>
+                    <controls:MenuLabel Content="권한 조회"/>
+                    <controls:MenuLabel Content="역할 관리"/>
+                </StackPanel>
+                <StackPanel Width="150">
+                    <controls:MenuLabel Content="메뉴 등록"/>
+                    <controls:MenuLabel Content="메뉴 조회"/>
+                    <controls:MenuLabel Content="메뉴 순서 변경"/>
+                </StackPanel>
+            </StackPanel>
+        </controls:MenuPanel>
+
         <!-- RoundButton Demo -->
-        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+        <StackPanel Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
             <TextBlock Text="RoundButton Demo"
                        Foreground="White" FontSize="18" FontWeight="Bold"
                        HorizontalAlignment="Center" Margin="0,0,0,30"/>

@@ -7,8 +7,11 @@ FactoryViewUI.dll의 컨트롤들을 WPF로 포팅하는 프로젝트입니다.
 ```
 WpfLol/
 ├── Controls/
-│   ├── RoundButton.cs        # WPF용 RoundButton 컨트롤
-│   └── MenuButton.cs         # WPF용 MenuButton 컨트롤
+│   ├── RoundButton.cs        # 둥근 버튼 컨트롤
+│   ├── MenuButton.cs         # 상단 메뉴 버튼 컨트롤
+│   ├── MenuLabel.cs          # 소메뉴 라벨 컨트롤
+│   ├── MenuLabelControl.cs   # 중메뉴 라벨 컨트롤
+│   └── MenuPanel.cs          # 드롭다운 메뉴 패널
 ├── Types/
 │   ├── ColorType.cs          # Blue, Orange, Green, Black, White
 │   ├── ButtonIconType.cs     # 버튼 아이콘 타입
@@ -115,6 +118,75 @@ FactoryViewUI의 `MenuButton`을 WPF용으로 포팅한 컨트롤입니다. 상�
 
 ---
 
+### MenuLabelControl (중메뉴 라벨)
+
+메뉴 카테고리를 표시하는 라벨입니다.
+
+#### 사용법
+
+```xml
+<controls:MenuLabelControl Content="사용자 관리"/>
+<controls:MenuLabelControl Content="권한 관리"/>
+```
+
+#### 속성
+
+| 속성 | 타입 | 기본값 | 설명 |
+|------|------|--------|------|
+| `HoverForeground` | `Brush` | `White` | 호버 시 글자색 |
+| `NormalForeground` | `Brush` | `#A99B8C` | 기본 글자색 |
+| `HasChildren` | `bool` | `false` | 하위 메뉴 존재 여부 |
+
+---
+
+### MenuLabel (소메뉴 라벨)
+
+드롭다운 메뉴의 개별 항목입니다.
+
+#### 사용법
+
+```xml
+<controls:MenuLabel Content="사용자 등록"/>
+<controls:MenuLabel Content="사용자 조회"/>
+```
+
+#### 속성
+
+| 속성 | 타입 | 기본값 | 설명 |
+|------|------|--------|------|
+| `HoverForeground` | `Brush` | `#00A3FF` | 호버 시 글자색 (하늘색) |
+| `NormalForeground` | `Brush` | `White` | 기본 글자색 |
+
+---
+
+### MenuPanel (메뉴 패널)
+
+드롭다운 메뉴의 컨테이너입니다.
+
+#### 사용법
+
+```xml
+<controls:MenuPanel IsOpen="True">
+    <StackPanel>
+        <controls:MenuLabel Content="메뉴 항목 1"/>
+        <controls:MenuLabel Content="메뉴 항목 2"/>
+    </StackPanel>
+</controls:MenuPanel>
+```
+
+#### 속성
+
+| 속성 | 타입 | 기본값 | 설명 |
+|------|------|--------|------|
+| `IsOpen` | `bool` | `false` | 패널 표시 여부 |
+
+#### 색상
+
+- 배경색: `#1F303A`
+- 테두리: `#2A3F4D`
+
+---
+
 ## 빌드 및 실행
 
 ```bash
@@ -136,5 +208,6 @@ dotnet run --project WpfLol/WpfLol.csproj
 
 - [ ] ButtonIcon 지원 (아이콘 + 텍스트)
 - [x] MenuButton 포팅
+- [x] MenuLabel, MenuLabelControl, MenuPanel 포팅
 - [ ] LabelTextEdit 등 LabelValueControl 포팅
 - [ ] FvGridControl 포팅
