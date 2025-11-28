@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfLol", "WpfLol\WpfLol.csproj", "{1A553D93-4BFA-4EA7-9AFB-6C475984DA16}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactoryView", "FactoryView\FactoryView.csproj", "{69106BE1-BB05-4284-97CF-DA395F0A792D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{1A553D93-4BFA-4EA7-9AFB-6C475984DA16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A553D93-4BFA-4EA7-9AFB-6C475984DA16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A553D93-4BFA-4EA7-9AFB-6C475984DA16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69106BE1-BB05-4284-97CF-DA395F0A792D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69106BE1-BB05-4284-97CF-DA395F0A792D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69106BE1-BB05-4284-97CF-DA395F0A792D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69106BE1-BB05-4284-97CF-DA395F0A792D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

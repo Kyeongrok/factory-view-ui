@@ -182,4 +182,559 @@
         <Setter Property="Padding" Value="5"/>
     </Style>
 
+    <!-- LabelTextEdit Style (라벨 + 텍스트 입력) -->
+    <Style TargetType="{x:Type controls:LabelTextEdit}">
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="MinWidth" Value="300"/>
+        <Setter Property="MaxHeight" Value="30"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:LabelTextEdit}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="{Binding CaptionWidth, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Caption Label -->
+                        <Border Grid.Column="0" Background="#F0F0F0" BorderBrush="#D0D0D0" BorderThickness="1,1,0,1">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5,0">
+                                <!-- Required Indicator -->
+                                <TextBlock x:Name="requiredIndicator"
+                                           Text="*"
+                                           Foreground="Red"
+                                           FontWeight="Bold"
+                                           Margin="0,0,3,0"
+                                           Visibility="Collapsed"/>
+                                <!-- Caption Text -->
+                                <TextBlock Text="{TemplateBinding Caption}"
+                                           Foreground="#323232"
+                                           VerticalAlignment="Center"
+                                           FontSize="12"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- TextBox -->
+                        <TextBox x:Name="PART_TextBox"
+                                 Grid.Column="1"
+                                 Text="{Binding EditText, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 IsReadOnly="{TemplateBinding IsReadOnly}"
+                                 MaxLength="{TemplateBinding MaxLength}"
+                                 VerticalContentAlignment="Center"
+                                 Padding="5,0"
+                                 BorderBrush="#D0D0D0"
+                                 BorderThickness="1"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsRequired" Value="True">
+                            <Setter TargetName="requiredIndicator" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsReadOnly" Value="True">
+                            <Setter TargetName="PART_TextBox" Property="Background" Value="#F5F5F5"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- LabelLookUpEdit Style (라벨 + 콤보박스) -->
+    <Style TargetType="{x:Type controls:LabelLookUpEdit}">
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="MinWidth" Value="300"/>
+        <Setter Property="MaxHeight" Value="30"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:LabelLookUpEdit}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="{Binding CaptionWidth, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Caption Label -->
+                        <Border Grid.Column="0" Background="#F0F0F0" BorderBrush="#D0D0D0" BorderThickness="1,1,0,1">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5,0">
+                                <!-- Required Indicator -->
+                                <TextBlock x:Name="requiredIndicator"
+                                           Text="*"
+                                           Foreground="Red"
+                                           FontWeight="Bold"
+                                           Margin="0,0,3,0"
+                                           Visibility="Collapsed"/>
+                                <!-- Caption Text -->
+                                <TextBlock Text="{TemplateBinding Caption}"
+                                           Foreground="#323232"
+                                           VerticalAlignment="Center"
+                                           FontSize="12"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- ComboBox -->
+                        <ComboBox x:Name="PART_ComboBox"
+                                  Grid.Column="1"
+                                  ItemsSource="{TemplateBinding ItemsSource}"
+                                  DisplayMemberPath="{TemplateBinding DisplayMemberPath}"
+                                  SelectedValuePath="{TemplateBinding ValueMemberPath}"
+                                  SelectedIndex="{Binding SelectedIndex, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                  SelectedItem="{Binding SelectedItem, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                  SelectedValue="{Binding EditValue, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                  IsEditable="{TemplateBinding IsEditable}"
+                                  VerticalContentAlignment="Center"
+                                  Padding="5,0"
+                                  BorderBrush="#D0D0D0"
+                                  BorderThickness="1"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsRequired" Value="True">
+                            <Setter TargetName="requiredIndicator" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- LabelDateEdit Style (라벨 + 날짜 선택) -->
+    <Style TargetType="{x:Type controls:LabelDateEdit}">
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="MinWidth" Value="300"/>
+        <Setter Property="MaxHeight" Value="30"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:LabelDateEdit}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="{Binding CaptionWidth, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Caption Label -->
+                        <Border Grid.Column="0" Background="#F0F0F0" BorderBrush="#D0D0D0" BorderThickness="1,1,0,1">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5,0">
+                                <!-- Required Indicator -->
+                                <TextBlock x:Name="requiredIndicator"
+                                           Text="*"
+                                           Foreground="Red"
+                                           FontWeight="Bold"
+                                           Margin="0,0,3,0"
+                                           Visibility="Collapsed"/>
+                                <!-- Caption Text -->
+                                <TextBlock Text="{TemplateBinding Caption}"
+                                           Foreground="#323232"
+                                           VerticalAlignment="Center"
+                                           FontSize="12"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- DatePicker -->
+                        <DatePicker x:Name="PART_DatePicker"
+                                    Grid.Column="1"
+                                    SelectedDate="{Binding SelectedDate, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                    DisplayDateStart="{TemplateBinding DisplayDateStart}"
+                                    DisplayDateEnd="{TemplateBinding DisplayDateEnd}"
+                                    VerticalContentAlignment="Center"
+                                    Padding="5,0"
+                                    BorderBrush="#D0D0D0"
+                                    BorderThickness="1"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsRequired" Value="True">
+                            <Setter TargetName="requiredIndicator" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsReadOnly" Value="True">
+                            <Setter TargetName="PART_DatePicker" Property="IsEnabled" Value="False"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- LabelCheckEdit Style (라벨 + 체크박스) -->
+    <Style TargetType="{x:Type controls:LabelCheckEdit}">
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="MinWidth" Value="300"/>
+        <Setter Property="MaxHeight" Value="30"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:LabelCheckEdit}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="{Binding CaptionWidth, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Caption Label -->
+                        <Border Grid.Column="0" Background="#F0F0F0" BorderBrush="#D0D0D0" BorderThickness="1,1,0,1">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5,0">
+                                <!-- Required Indicator -->
+                                <TextBlock x:Name="requiredIndicator"
+                                           Text="*"
+                                           Foreground="Red"
+                                           FontWeight="Bold"
+                                           Margin="0,0,3,0"
+                                           Visibility="Collapsed"/>
+                                <!-- Caption Text -->
+                                <TextBlock Text="{TemplateBinding Caption}"
+                                           Foreground="#323232"
+                                           VerticalAlignment="Center"
+                                           FontSize="12"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- CheckBox -->
+                        <Border Grid.Column="1" Background="White" BorderBrush="#D0D0D0" BorderThickness="1">
+                            <CheckBox x:Name="PART_CheckBox"
+                                      IsChecked="{Binding IsChecked, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                      IsThreeState="{TemplateBinding IsThreeState}"
+                                      Content="{TemplateBinding CheckText}"
+                                      VerticalAlignment="Center"
+                                      Margin="8,0"/>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsRequired" Value="True">
+                            <Setter TargetName="requiredIndicator" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- LabelRadioGroup Style (라벨 + 라디오버튼 그룹) -->
+    <Style TargetType="{x:Type controls:LabelRadioGroup}">
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="MinWidth" Value="300"/>
+        <Setter Property="MaxHeight" Value="30"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:LabelRadioGroup}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="{Binding CaptionWidth, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Caption Label -->
+                        <Border Grid.Column="0" Background="#F0F0F0" BorderBrush="#D0D0D0" BorderThickness="1,1,0,1">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5,0">
+                                <!-- Required Indicator -->
+                                <TextBlock x:Name="requiredIndicator"
+                                           Text="*"
+                                           Foreground="Red"
+                                           FontWeight="Bold"
+                                           Margin="0,0,3,0"
+                                           Visibility="Collapsed"/>
+                                <!-- Caption Text -->
+                                <TextBlock Text="{TemplateBinding Caption}"
+                                           Foreground="#323232"
+                                           VerticalAlignment="Center"
+                                           FontSize="12"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- RadioButton ItemsControl -->
+                        <Border Grid.Column="1" Background="White" BorderBrush="#D0D0D0" BorderThickness="1">
+                            <ItemsControl x:Name="PART_ItemsControl"
+                                          ItemsSource="{TemplateBinding ItemsSource}"
+                                          VerticalAlignment="Center"
+                                          Margin="8,0">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="{Binding Orientation, RelativeSource={RelativeSource AncestorType=controls:LabelRadioGroup}}"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <RadioButton Content="{Binding}" Margin="0,0,15,0"
+                                                     GroupName="{Binding FieldName, RelativeSource={RelativeSource AncestorType=controls:LabelRadioGroup}}"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsRequired" Value="True">
+                            <Setter TargetName="requiredIndicator" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- LabelDateEditBetween Style (라벨 + 시작/종료 날짜) -->
+    <Style TargetType="{x:Type controls:LabelDateEditBetween}">
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="MinWidth" Value="450"/>
+        <Setter Property="MaxHeight" Value="30"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:LabelDateEditBetween}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="{Binding CaptionWidth, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Caption Label -->
+                        <Border Grid.Column="0" Background="#F0F0F0" BorderBrush="#D0D0D0" BorderThickness="1,1,0,1">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5,0">
+                                <!-- Required Indicator -->
+                                <TextBlock x:Name="requiredIndicator"
+                                           Text="*"
+                                           Foreground="Red"
+                                           FontWeight="Bold"
+                                           Margin="0,0,3,0"
+                                           Visibility="Collapsed"/>
+                                <!-- Caption Text -->
+                                <TextBlock Text="{TemplateBinding Caption}"
+                                           Foreground="#323232"
+                                           VerticalAlignment="Center"
+                                           FontSize="12"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Start DatePicker -->
+                        <DatePicker x:Name="PART_StartDatePicker"
+                                    Grid.Column="1"
+                                    SelectedDate="{Binding StartDate, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                    DisplayDateStart="{TemplateBinding DisplayDateStart}"
+                                    DisplayDateEnd="{TemplateBinding DisplayDateEnd}"
+                                    VerticalContentAlignment="Center"
+                                    Padding="5,0"
+                                    BorderBrush="#D0D0D0"
+                                    BorderThickness="1"/>
+
+                        <!-- Separator -->
+                        <TextBlock Grid.Column="2"
+                                   Text="{TemplateBinding SeparatorText}"
+                                   VerticalAlignment="Center"
+                                   Margin="8,0"
+                                   Foreground="#323232"/>
+
+                        <!-- End DatePicker -->
+                        <DatePicker x:Name="PART_EndDatePicker"
+                                    Grid.Column="3"
+                                    SelectedDate="{Binding EndDate, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                    DisplayDateStart="{TemplateBinding DisplayDateStart}"
+                                    DisplayDateEnd="{TemplateBinding DisplayDateEnd}"
+                                    VerticalContentAlignment="Center"
+                                    Padding="5,0"
+                                    BorderBrush="#D0D0D0"
+                                    BorderThickness="1"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsRequired" Value="True">
+                            <Setter TargetName="requiredIndicator" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsReadOnly" Value="True">
+                            <Setter TargetName="PART_StartDatePicker" Property="IsEnabled" Value="False"/>
+                            <Setter TargetName="PART_EndDatePicker" Property="IsEnabled" Value="False"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- FvGridControl Style (데이터 그리드) -->
+    <Style TargetType="{x:Type controls:FvGridControl}">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="#D0D0D0"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="RowHeaderWidth" Value="40"/>
+        <Setter Property="AlternatingRowBackground" Value="#F5F5F5"/>
+        <Setter Property="GridLinesVisibility" Value="All"/>
+        <Setter Property="HorizontalGridLinesBrush" Value="#E0E0E0"/>
+        <Setter Property="VerticalGridLinesBrush" Value="#E0E0E0"/>
+        <Setter Property="ColumnHeaderStyle">
+            <Setter.Value>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="#F0F0F0"/>
+                    <Setter Property="Foreground" Value="#323232"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="Padding" Value="8,6"/>
+                    <Setter Property="BorderBrush" Value="#D0D0D0"/>
+                    <Setter Property="BorderThickness" Value="0,0,1,1"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="RowHeaderStyle">
+            <Setter.Value>
+                <Style TargetType="DataGridRowHeader">
+                    <Setter Property="Background" Value="#F0F0F0"/>
+                    <Setter Property="Foreground" Value="#666666"/>
+                    <Setter Property="FontSize" Value="11"/>
+                    <Setter Property="Width" Value="40"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="BorderBrush" Value="#D0D0D0"/>
+                    <Setter Property="BorderThickness" Value="0,0,1,1"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="CellStyle">
+            <Setter.Value>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="Padding" Value="8,4"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#104F89"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="RowStyle">
+            <Setter.Value>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="White"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#104F89"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#E8F4FC"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- AccordionControl Style (아코디언 메뉴) -->
+    <Style TargetType="{x:Type controls:AccordionControl}">
+        <Setter Property="Background" Value="#1F303A"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:AccordionControl}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ScrollViewer Focusable="False" Padding="{TemplateBinding Padding}">
+                            <ItemsPresenter/>
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- AccordionItem Style (아코디언 항목) -->
+    <Style TargetType="{x:Type controls:AccordionItem}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Padding" Value="12,8"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:AccordionItem}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Header -->
+                        <Border x:Name="headerBorder"
+                                Grid.Row="0"
+                                Background="{TemplateBinding Background}"
+                                Padding="{TemplateBinding Padding}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Icon -->
+                                <ContentPresenter Grid.Column="0"
+                                                  Content="{TemplateBinding Icon}"
+                                                  VerticalAlignment="Center"
+                                                  Margin="0,0,8,0"/>
+
+                                <!-- Header Text -->
+                                <ContentPresenter Grid.Column="1"
+                                                  ContentSource="Header"
+                                                  VerticalAlignment="Center"/>
+
+                                <!-- Expand Arrow -->
+                                <Path x:Name="expandArrow"
+                                      Grid.Column="2"
+                                      Data="M 0 0 L 4 4 L 8 0"
+                                      Stroke="{TemplateBinding Foreground}"
+                                      StrokeThickness="2"
+                                      VerticalAlignment="Center"
+                                      Margin="8,0,0,0"
+                                      Visibility="Collapsed"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- Items -->
+                        <Border x:Name="itemsBorder"
+                                Grid.Row="1"
+                                Background="#010A13"
+                                Visibility="Collapsed">
+                            <ItemsPresenter/>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsGroup" Value="True">
+                            <Setter TargetName="headerBorder" Property="Background" Value="#1F303A"/>
+                            <Setter TargetName="expandArrow" Property="Visibility" Value="Visible"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                        </Trigger>
+                        <Trigger Property="IsExpanded" Value="True">
+                            <Setter TargetName="itemsBorder" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="expandArrow" Property="Data" Value="M 0 4 L 4 0 L 8 4"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="headerBorder" Property="Background" Value="#13437C"/>
+                            <Setter Property="Foreground" Value="#00A3FF"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="headerBorder" Property="Background" Value="#13437C"/>
+                            <Setter Property="Foreground" Value="White"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

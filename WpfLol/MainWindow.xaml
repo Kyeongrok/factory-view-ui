@@ -117,32 +117,127 @@
             </StackPanel>
         </controls:MenuPanel>
 
-        <!-- RoundButton Demo -->
-        <StackPanel Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
-            <TextBlock Text="RoundButton Demo"
-                       Foreground="White" FontSize="18" FontWeight="Bold"
-                       HorizontalAlignment="Center" Margin="0,0,0,30"/>
+        <!-- Main Content Area -->
+        <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Vertical" Margin="20">
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
-                <controls:RoundButton Content="Blue (Default)" ButtonColor="Blue" Margin="5"/>
-                <controls:RoundButton Content="Green" ButtonColor="Green" Margin="5"/>
-                <controls:RoundButton Content="Orange" ButtonColor="Orange" Margin="5"/>
-                <controls:RoundButton Content="Black" ButtonColor="Black" Margin="5"/>
-                <controls:RoundButton Content="White" ButtonColor="White" Margin="5"/>
-            </StackPanel>
+                <!-- LabelValueControl Demo -->
+                <Border Background="#F5F5F5" CornerRadius="8" Padding="20" Margin="0,0,0,20">
+                    <StackPanel>
+                        <TextBlock Text="LabelValueControl Demo"
+                                   Foreground="#323232" FontSize="18" FontWeight="Bold"
+                                   HorizontalAlignment="Center" Margin="0,0,0,20"/>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20">
-                <controls:RoundButton Content="Search" ButtonColor="Blue" Margin="5"/>
-                <controls:RoundButton Content="Add" ButtonColor="Green" Margin="5"/>
-                <controls:RoundButton Content="Save" ButtonColor="Blue" Margin="5"/>
-                <controls:RoundButton Content="Delete" ButtonColor="Orange" Margin="5"/>
-                <controls:RoundButton Content="Cancel" ButtonColor="Black" Margin="5"/>
-            </StackPanel>
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                            <!-- LabelTextEdit -->
+                            <controls:LabelTextEdit Caption="사용자 ID" IsRequired="True" CaptionWidth="120" Width="400" Margin="0,5"/>
+                            <controls:LabelTextEdit Caption="사용자명" IsRequired="True" CaptionWidth="120" Width="400" Margin="0,5"/>
+                            <controls:LabelTextEdit Caption="이메일" CaptionWidth="120" Width="400" Margin="0,5"/>
+                            <controls:LabelTextEdit Caption="비고" CaptionWidth="120" Width="400" IsReadOnly="True" Margin="0,5"/>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20">
-                <controls:RoundButton Content="Rounded More" ButtonColor="Blue" CornerRadius="12" Margin="5"/>
-                <controls:RoundButton Content="Disabled" ButtonColor="Green" IsEnabled="False" Margin="5"/>
+                            <!-- LabelLookUpEdit -->
+                            <controls:LabelLookUpEdit Caption="부서" IsRequired="True" CaptionWidth="120" Width="400" Margin="0,5"/>
+                            <controls:LabelLookUpEdit Caption="직급" CaptionWidth="120" Width="400" Margin="0,5"/>
+
+                            <!-- LabelDateEdit -->
+                            <controls:LabelDateEdit Caption="입사일" IsRequired="True" CaptionWidth="120" Width="400" Margin="0,5"/>
+                            <controls:LabelDateEdit Caption="퇴사일" CaptionWidth="120" Width="400" Margin="0,5"/>
+
+                            <!-- LabelCheckEdit -->
+                            <controls:LabelCheckEdit Caption="사용여부" CaptionWidth="120" Width="400" Margin="0,5" IsChecked="True" CheckText="사용"/>
+                            <controls:LabelCheckEdit Caption="관리자" CaptionWidth="120" Width="400" Margin="0,5" CheckText="관리자 권한 부여"/>
+
+                            <!-- LabelRadioGroup -->
+                            <controls:LabelRadioGroup Caption="성별" CaptionWidth="120" Width="400" Margin="0,5" FieldName="gender">
+                                <controls:LabelRadioGroup.ItemsSource>
+                                    <x:Array Type="sys:String" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                        <sys:String>남성</sys:String>
+                                        <sys:String>여성</sys:String>
+                                    </x:Array>
+                                </controls:LabelRadioGroup.ItemsSource>
+                            </controls:LabelRadioGroup>
+
+                            <!-- LabelDateEditBetween -->
+                            <controls:LabelDateEditBetween Caption="조회기간" IsRequired="True" CaptionWidth="120" Width="500" Margin="0,5"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- FvGridControl Demo -->
+                <Border Background="#F5F5F5" CornerRadius="8" Padding="20" Margin="0,0,0,20">
+                    <StackPanel>
+                        <TextBlock Text="FvGridControl Demo"
+                                   Foreground="#323232" FontSize="18" FontWeight="Bold"
+                                   HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+                        <controls:FvGridControl x:Name="demoGrid" Height="200" Width="700">
+                            <controls:FvGridControl.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="60"/>
+                                <DataGridTextColumn Header="이름" Binding="{Binding Name}" Width="120"/>
+                                <DataGridTextColumn Header="부서" Binding="{Binding Department}" Width="100"/>
+                                <DataGridTextColumn Header="직급" Binding="{Binding Position}" Width="100"/>
+                                <DataGridTextColumn Header="입사일" Binding="{Binding HireDate}" Width="100"/>
+                            </controls:FvGridControl.Columns>
+                        </controls:FvGridControl>
+                    </StackPanel>
+                </Border>
+
+                <!-- AccordionControl Demo -->
+                <Border CornerRadius="8" Margin="0,0,0,20">
+                    <StackPanel>
+                        <TextBlock Text="AccordionControl Demo"
+                                   Foreground="White" FontSize="18" FontWeight="Bold" Background="#1F303A"
+                                   HorizontalAlignment="Stretch" Padding="20,10" Margin="0,0,0,0"/>
+
+                        <controls:AccordionControl Width="300" Height="250">
+                            <controls:AccordionItem Header="시스템 관리" IsGroup="True" IsExpanded="True">
+                                <controls:AccordionItem Header="사용자 관리"/>
+                                <controls:AccordionItem Header="권한 관리"/>
+                                <controls:AccordionItem Header="메뉴 관리"/>
+                            </controls:AccordionItem>
+                            <controls:AccordionItem Header="생산 관리" IsGroup="True">
+                                <controls:AccordionItem Header="작업 지시"/>
+                                <controls:AccordionItem Header="생산 실적"/>
+                                <controls:AccordionItem Header="불량 관리"/>
+                            </controls:AccordionItem>
+                            <controls:AccordionItem Header="품질 관리" IsGroup="True">
+                                <controls:AccordionItem Header="검사 기준"/>
+                                <controls:AccordionItem Header="검사 실적"/>
+                            </controls:AccordionItem>
+                        </controls:AccordionControl>
+                    </StackPanel>
+                </Border>
+
+                <!-- RoundButton Demo -->
+                <Border Background="#2A3F4D" CornerRadius="8" Padding="20">
+                    <StackPanel>
+                        <TextBlock Text="RoundButton Demo"
+                                   Foreground="White" FontSize="18" FontWeight="Bold"
+                                   HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+                            <controls:RoundButton Content="Blue (Default)" ButtonColor="Blue" Margin="5"/>
+                            <controls:RoundButton Content="Green" ButtonColor="Green" Margin="5"/>
+                            <controls:RoundButton Content="Orange" ButtonColor="Orange" Margin="5"/>
+                            <controls:RoundButton Content="Black" ButtonColor="Black" Margin="5"/>
+                            <controls:RoundButton Content="White" ButtonColor="White" Margin="5"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20">
+                            <controls:RoundButton Content="Search" ButtonColor="Blue" Margin="5"/>
+                            <controls:RoundButton Content="Add" ButtonColor="Green" Margin="5"/>
+                            <controls:RoundButton Content="Save" ButtonColor="Blue" Margin="5"/>
+                            <controls:RoundButton Content="Delete" ButtonColor="Orange" Margin="5"/>
+                            <controls:RoundButton Content="Cancel" ButtonColor="Black" Margin="5"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20">
+                            <controls:RoundButton Content="Rounded More" ButtonColor="Blue" CornerRadius="12" Margin="5"/>
+                            <controls:RoundButton Content="Disabled" ButtonColor="Green" IsEnabled="False" Margin="5"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
             </StackPanel>
-        </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>
