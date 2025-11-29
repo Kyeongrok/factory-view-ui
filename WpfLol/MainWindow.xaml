@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:WpfLol.Controls"
         xmlns:types="clr-namespace:WpfLol.Types"
+        xmlns:units="clr-namespace:FactoryView.Support.UI.Units;assembly=FactoryView.Support"
         mc:Ignorable="d"
         Background="#1F303A"
         Title="FactoryViewUI Controls Demo" Height="550" Width="900">
@@ -208,32 +209,32 @@
                     </StackPanel>
                 </Border>
 
-                <!-- RoundButton Demo -->
+                <!-- FVButton Demo -->
                 <Border Background="#2A3F4D" CornerRadius="8" Padding="20">
                     <StackPanel>
-                        <TextBlock Text="RoundButton Demo"
+                        <TextBlock Text="FVButton Demo"
                                    Foreground="White" FontSize="18" FontWeight="Bold"
                                    HorizontalAlignment="Center" Margin="0,0,0,20"/>
 
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
-                            <controls:RoundButton Content="Blue (Default)" ButtonColor="Blue" Margin="5"/>
-                            <controls:RoundButton Content="Green" ButtonColor="Green" Margin="5"/>
-                            <controls:RoundButton Content="Orange" ButtonColor="Orange" Margin="5"/>
-                            <controls:RoundButton Content="Black" ButtonColor="Black" Margin="5"/>
-                            <controls:RoundButton Content="White" ButtonColor="White" Margin="5"/>
+                            <units:FVButton Content="Blue (Default)" ButtonColor="Blue" Margin="5"/>
+                            <units:FVButton Content="Green" ButtonColor="Green" Margin="5"/>
+                            <units:FVButton Content="Orange" ButtonColor="Orange" Margin="5"/>
+                            <units:FVButton Content="Black" ButtonColor="Black" Margin="5"/>
+                            <units:FVButton Content="White" ButtonColor="White" Margin="5"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20">
-                            <controls:RoundButton Content="Search" ButtonColor="Blue" Margin="5"/>
-                            <controls:RoundButton Content="Add" ButtonColor="Green" Margin="5"/>
-                            <controls:RoundButton Content="Save" ButtonColor="Blue" Margin="5"/>
-                            <controls:RoundButton Content="Delete" ButtonColor="Orange" Margin="5"/>
-                            <controls:RoundButton Content="Cancel" ButtonColor="Black" Margin="5"/>
+                            <units:FVButton Content="Search" ButtonColor="Blue" Margin="5"/>
+                            <units:FVButton Content="Add" ButtonColor="Green" Margin="5"/>
+                            <units:FVButton Content="Save" ButtonColor="Blue" Margin="5"/>
+                            <units:FVButton Content="Delete" ButtonColor="Orange" Margin="5"/>
+                            <units:FVButton Content="Cancel" ButtonColor="Black" Margin="5"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20">
-                            <controls:RoundButton Content="Rounded More" ButtonColor="Blue" CornerRadius="12" Margin="5"/>
-                            <controls:RoundButton Content="Disabled" ButtonColor="Green" IsEnabled="False" Margin="5"/>
+                            <units:FVButton Content="Rounded More" ButtonColor="Blue" CornerRadius="12" Margin="5"/>
+                            <units:FVButton Content="Disabled" ButtonColor="Green" IsEnabled="False" Margin="5"/>
                         </StackPanel>
                     </StackPanel>
                 </Border>

@@ -1,32 +1,32 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using WpfLol.Types;
+using FactoryView.Support.Types;
 
-namespace WpfLol.Controls;
+namespace FactoryView.Support.UI.Units;
 
-public class RoundButton : Button
+public class FVButton : Button
 {
     #region Dependency Properties
 
     public static readonly DependencyProperty ButtonColorProperty =
-        DependencyProperty.Register(nameof(ButtonColor), typeof(ColorType), typeof(RoundButton),
+        DependencyProperty.Register(nameof(ButtonColor), typeof(ColorType), typeof(FVButton),
             new PropertyMetadata(ColorType.Blue, OnButtonColorChanged));
 
     public static readonly DependencyProperty ButtonIconProperty =
-        DependencyProperty.Register(nameof(ButtonIcon), typeof(ButtonIconType), typeof(RoundButton),
+        DependencyProperty.Register(nameof(ButtonIcon), typeof(ButtonIconType), typeof(FVButton),
             new PropertyMetadata(ButtonIconType.None));
 
     public static readonly DependencyProperty CornerRadiusProperty =
-        DependencyProperty.Register(nameof(CornerRadius), typeof(CornerRadius), typeof(RoundButton),
+        DependencyProperty.Register(nameof(CornerRadius), typeof(CornerRadius), typeof(FVButton),
             new PropertyMetadata(new CornerRadius(4)));
 
     public static readonly DependencyProperty HoverBackgroundProperty =
-        DependencyProperty.Register(nameof(HoverBackground), typeof(Brush), typeof(RoundButton),
+        DependencyProperty.Register(nameof(HoverBackground), typeof(Brush), typeof(FVButton),
             new PropertyMetadata(null));
 
     public static readonly DependencyProperty PressedBackgroundProperty =
-        DependencyProperty.Register(nameof(PressedBackground), typeof(Brush), typeof(RoundButton),
+        DependencyProperty.Register(nameof(PressedBackground), typeof(Brush), typeof(FVButton),
             new PropertyMetadata(null));
 
     #endregion
@@ -84,20 +84,20 @@ public class RoundButton : Button
 
     #endregion
 
-    static RoundButton()
+    static FVButton()
     {
-        DefaultStyleKeyProperty.OverrideMetadata(typeof(RoundButton),
-            new FrameworkPropertyMetadata(typeof(RoundButton)));
+        DefaultStyleKeyProperty.OverrideMetadata(typeof(FVButton),
+            new FrameworkPropertyMetadata(typeof(FVButton)));
     }
 
-    public RoundButton()
+    public FVButton()
     {
         ApplyButtonColor(ColorType.Blue);
     }
 
     private static void OnButtonColorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (d is RoundButton button)
+        if (d is FVButton button)
         {
             button.ApplyButtonColor((ColorType)e.NewValue);
         }

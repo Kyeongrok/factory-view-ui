@@ -9,11 +9,13 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\FactoryView.Support\FactoryView.Support.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
       <None Update="Images\logo.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
     </ItemGroup>
-    
-    
 
 </Project>

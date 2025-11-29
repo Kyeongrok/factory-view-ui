@@ -1,4 +1,4 @@
-namespace WpfLol.Types;
+namespace FactoryView.Support.Types;
 
 public enum ButtonIconType
 {
