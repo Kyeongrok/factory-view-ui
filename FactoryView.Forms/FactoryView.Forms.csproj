@@ -10,9 +10,11 @@
 
     <ItemGroup>
       <ProjectReference Include="..\FactoryView.Support\FactoryView.Support.csproj" />
+      <ProjectReference Include="..\WpfLol\WpfLol.csproj" />
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
       <PackageReference Include="Jamesnet.Wpf" Version="1.0.0.113" />
     </ItemGroup>
 
