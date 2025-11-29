@@ -9,6 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\FactoryView.Forms\FactoryView.Forms.csproj" />
         <ProjectReference Include="..\WpfLol\WpfLol.csproj" />
     </ItemGroup>
 

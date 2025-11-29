@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactoryView", "FactoryView\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactoryView.Support", "FactoryView.Support\FactoryView.Support.csproj", "{30D3C663-0F17-4D66-8B53-80D1C1E455E9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactoryView.Forms", "FactoryView.Forms\FactoryView.Forms.csproj", "{A3F18AE6-9C9E-4309-B6E0-B6A8EB81C9DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{30D3C663-0F17-4D66-8B53-80D1C1E455E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30D3C663-0F17-4D66-8B53-80D1C1E455E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30D3C663-0F17-4D66-8B53-80D1C1E455E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3F18AE6-9C9E-4309-B6E0-B6A8EB81C9DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3F18AE6-9C9E-4309-B6E0-B6A8EB81C9DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3F18AE6-9C9E-4309-B6E0-B6A8EB81C9DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3F18AE6-9C9E-4309-B6E0-B6A8EB81C9DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,22 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:based="clr-namespace:FactoryView.Support.UI.Units;assembly=FactoryView.Support"
+                    xmlns:views="clr-namespace:FactoryView.Forms.UI.Views">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/FactoryView.Support;component/Themes/Generic.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style
+        TargetType="{x:Type views:FactoryViewWindow}"
+        BasedOn="{StaticResource {x:Type based:DarkWindow}}">
+        <Setter Property="Content">
+            <Setter.Value>
+                <TextBlock 
+                    Text="Window Content!" 
+                    Foreground="#FFFFFF"
+                    Margin="10"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
