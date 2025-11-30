@@ -42,6 +42,8 @@
                             </Grid.ColumnDefinitions>
                             <Border Grid.ColumnSpan="4"
                                     Background="#222222"/>
+                            
+                            <units:CloseButton Grid.Column="3"/>
                             <ContentPresenter 
                                 Grid.Row="1" 
                                 Grid.ColumnSpan="4"
