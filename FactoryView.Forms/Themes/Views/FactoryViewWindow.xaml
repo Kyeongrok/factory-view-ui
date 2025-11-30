@@ -2,10 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:based="clr-namespace:FactoryView.Support.UI.Units;assembly=FactoryView.Support"
                     xmlns:views="clr-namespace:FactoryView.Forms.UI.Views"
+                    xmlns:main="clr-namespace:FactoryView.Main.UI.Views;assembly=FactoryView.Main"
                     xmlns:controls="clr-namespace:WpfLol.Controls;assembly=WpfLol">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/FactoryView.Support;component/Themes/Generic.xaml"/>
+        <ResourceDictionary Source="/FactoryView.Main;component/Themes/Generic.xaml"/>
         <ResourceDictionary Source="/WpfLol;component/Themes/Generic.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
@@ -171,76 +173,24 @@
 
                         <!-- Accordion Menu (Left Side) -->
                         <Border Grid.Column="0" Background="#1F303A" BorderBrush="#2A3F4D" BorderThickness="0,0,1,0">
-                            <controls:AccordionControl>
-                                <controls:AccordionItem Header="System" IsGroup="True" IsExpanded="True">
-                                    <controls:AccordionItem Header="User Management" Tag="UserManagement"/>
-                                    <controls:AccordionItem Header="Role Management" Tag="RoleManagement"/>
-                                    <controls:AccordionItem Header="Menu Management" Tag="MenuManagement"/>
-                                </controls:AccordionItem>
-                                <controls:AccordionItem Header="Production" IsGroup="True">
-                                    <controls:AccordionItem Header="Work Order" Tag="WorkOrder"/>
-                                    <controls:AccordionItem Header="Production Result" Tag="ProductionResult"/>
-                                </controls:AccordionItem>
-                                <controls:AccordionItem Header="Quality" IsGroup="True">
-                                    <controls:AccordionItem Header="Inspection" Tag="Inspection"/>
-                                </controls:AccordionItem>
-                            </controls:AccordionControl>
+                            <based:AccordionControl>
+                                <based:AccordionItem Header="System" IsGroup="True" IsExpanded="True">
+                                    <based:AccordionItem Header="User Management" Tag="UserManagement"/>
+                                    <based:AccordionItem Header="Role Management" Tag="RoleManagement"/>
+                                    <based:AccordionItem Header="Menu Management" Tag="MenuManagement"/>
+                                </based:AccordionItem>
+                                <based:AccordionItem Header="Production" IsGroup="True">
+                                    <based:AccordionItem Header="Work Order" Tag="WorkOrder"/>
+                                    <based:AccordionItem Header="Production Result" Tag="ProductionResult"/>
+                                </based:AccordionItem>
+                                <based:AccordionItem Header="Quality" IsGroup="True">
+                                    <based:AccordionItem Header="Inspection" Tag="Inspection"/>
+                                </based:AccordionItem>
+                            </based:AccordionControl>
                         </Border>
 
-                        <!-- Tab Content Area -->
-                        <Border Grid.Column="1" Background="#F0F0F0">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-
-                                <TabControl Grid.Row="0" Background="White"
-                                            ItemsSource="{Binding Tabs}"
-                                            SelectedItem="{Binding SelectedTab}">
-                                    <TabControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="{Binding Header}" VerticalAlignment="Center"/>
-                                                <Button Content="X"
-                                                        Background="Transparent"
-                                                        BorderThickness="0"
-                                                        FontSize="10"
-                                                        Margin="8,0,0,0"
-                                                        Cursor="Hand"
-                                                        Command="{Binding DataContext.CloseTabCommand, RelativeSource={RelativeSource AncestorType=TabControl}}"
-                                                        CommandParameter="{Binding FormName}"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </TabControl.ItemTemplate>
-                                    <TabControl.ContentTemplate>
-                                        <DataTemplate>
-                                            <Grid Background="#F5F5F5">
-                                                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                    <TextBlock Text="{Binding Header}"
-                                                               FontSize="32"
-                                                               FontWeight="Bold"
-                                                               Foreground="#1F303A"
-                                                               HorizontalAlignment="Center"/>
-                                                    <TextBlock Text="{Binding FormName, StringFormat='Form: {0}'}"
-                                                               FontSize="14"
-                                                               Foreground="#666666"
-                                                               Margin="0,10,0,0"
-                                                               HorizontalAlignment="Center"/>
-                                                </StackPanel>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </TabControl.ContentTemplate>
-                                </TabControl>
-
-                                <Border Grid.Row="1" Background="#E0E0E0" Height="30">
-                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="5,0">
-                                        <TextBlock Text="Tabs: " Foreground="#666666" VerticalAlignment="Center"/>
-                                        <TextBlock Text="{Binding Tabs.Count}" Foreground="#666666" VerticalAlignment="Center"/>
-                                    </StackPanel>
-                                </Border>
-                            </Grid>
-                        </Border>
+                        <!-- Main Contents -->
+                        <main:MainContents Grid.Column="1"/>
                     </Grid>
 
                     <!-- Status Bar -->

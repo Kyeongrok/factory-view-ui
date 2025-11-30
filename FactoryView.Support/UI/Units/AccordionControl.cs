@@ -1,14 +1,11 @@
-using System.Collections;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace WpfLol.Controls;
+namespace FactoryView.Support.UI.Units;
 
 /// <summary>
 /// AccordionControl - 아코디언 메뉴 컨트롤
-/// FactoryViewUI의 AccordionControl (DevExpress 기반)을 WPF로 포팅
-/// TreeView 기반으로 아코디언 스타일 메뉴 구현
 /// </summary>
 public class AccordionControl : TreeView
 {
@@ -46,63 +43,42 @@ public class AccordionControl : TreeView
 
     #region Properties
 
-    /// <summary>
-    /// 헤더 배경색
-    /// </summary>
     public Brush HeaderBackground
     {
         get => (Brush)GetValue(HeaderBackgroundProperty);
         set => SetValue(HeaderBackgroundProperty, value);
     }
 
-    /// <summary>
-    /// 헤더 글자색
-    /// </summary>
     public Brush HeaderForeground
     {
         get => (Brush)GetValue(HeaderForegroundProperty);
         set => SetValue(HeaderForegroundProperty, value);
     }
 
-    /// <summary>
-    /// 아이템 배경색
-    /// </summary>
     public Brush ItemBackground
     {
         get => (Brush)GetValue(ItemBackgroundProperty);
         set => SetValue(ItemBackgroundProperty, value);
     }
 
-    /// <summary>
-    /// 아이템 글자색
-    /// </summary>
     public Brush ItemForeground
     {
         get => (Brush)GetValue(ItemForegroundProperty);
         set => SetValue(ItemForegroundProperty, value);
     }
 
-    /// <summary>
-    /// 아이템 호버 배경색
-    /// </summary>
     public Brush ItemHoverBackground
     {
         get => (Brush)GetValue(ItemHoverBackgroundProperty);
         set => SetValue(ItemHoverBackgroundProperty, value);
     }
 
-    /// <summary>
-    /// 아이템 호버 글자색
-    /// </summary>
     public Brush ItemHoverForeground
     {
         get => (Brush)GetValue(ItemHoverForegroundProperty);
         set => SetValue(ItemHoverForegroundProperty, value);
     }
 
-    /// <summary>
-    /// 최소화 상태
-    /// </summary>
     public bool IsMinimized
     {
         get => (bool)GetValue(IsMinimizedProperty);
@@ -143,18 +119,12 @@ public class AccordionItem : TreeViewItem
 
     #region Properties
 
-    /// <summary>
-    /// 아이콘
-    /// </summary>
     public object? Icon
     {
         get => GetValue(IconProperty);
         set => SetValue(IconProperty, value);
     }
 
-    /// <summary>
-    /// 그룹 여부 (헤더)
-    /// </summary>
     public bool IsGroup
     {
         get => (bool)GetValue(IsGroupProperty);

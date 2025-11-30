@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:WpfLol.Controls;assembly=WpfLol"
+        xmlns:units="clr-namespace:FactoryView.Support.UI.Units;assembly=FactoryView.Support"
         mc:Ignorable="d"
         Title="FactoryView"
         Height="800" Width="1400"
@@ -148,29 +149,29 @@
 
             <!-- Accordion Menu (Left Side) -->
             <Border Grid.Column="0" Background="#1F303A" BorderBrush="#2A3F4D" BorderThickness="0,0,1,0">
-                <controls:AccordionControl x:Name="accordionMenu">
+                <units:AccordionControl x:Name="accordionMenu">
                     <!-- Sample menu structure -->
-                    <controls:AccordionItem Header="시스템 관리" IsGroup="True" IsExpanded="True">
-                        <controls:AccordionItem Header="사용자 관리" Tag="UserManagement"/>
-                        <controls:AccordionItem Header="권한 관리" Tag="RoleManagement"/>
-                        <controls:AccordionItem Header="메뉴 관리" Tag="MenuManagement"/>
-                        <controls:AccordionItem Header="코드 관리" Tag="CodeManagement"/>
-                    </controls:AccordionItem>
-                    <controls:AccordionItem Header="생산 관리" IsGroup="True">
-                        <controls:AccordionItem Header="작업 지시" Tag="WorkOrder"/>
-                        <controls:AccordionItem Header="생산 실적" Tag="ProductionResult"/>
-                        <controls:AccordionItem Header="불량 관리" Tag="DefectManagement"/>
-                    </controls:AccordionItem>
-                    <controls:AccordionItem Header="품질 관리" IsGroup="True">
-                        <controls:AccordionItem Header="검사 기준" Tag="InspectionStandard"/>
-                        <controls:AccordionItem Header="검사 실적" Tag="InspectionResult"/>
-                    </controls:AccordionItem>
-                    <controls:AccordionItem Header="자재 관리" IsGroup="True">
-                        <controls:AccordionItem Header="입고 관리" Tag="MaterialIncome"/>
-                        <controls:AccordionItem Header="출고 관리" Tag="MaterialOutcome"/>
-                        <controls:AccordionItem Header="재고 현황" Tag="InventoryStatus"/>
-                    </controls:AccordionItem>
-                </controls:AccordionControl>
+                    <units:AccordionItem Header="시스템 관리" IsGroup="True" IsExpanded="True">
+                        <units:AccordionItem Header="사용자 관리" Tag="UserManagement"/>
+                        <units:AccordionItem Header="권한 관리" Tag="RoleManagement"/>
+                        <units:AccordionItem Header="메뉴 관리" Tag="MenuManagement"/>
+                        <units:AccordionItem Header="코드 관리" Tag="CodeManagement"/>
+                    </units:AccordionItem>
+                    <units:AccordionItem Header="생산 관리" IsGroup="True">
+                        <units:AccordionItem Header="작업 지시" Tag="WorkOrder"/>
+                        <units:AccordionItem Header="생산 실적" Tag="ProductionResult"/>
+                        <units:AccordionItem Header="불량 관리" Tag="DefectManagement"/>
+                    </units:AccordionItem>
+                    <units:AccordionItem Header="품질 관리" IsGroup="True">
+                        <units:AccordionItem Header="검사 기준" Tag="InspectionStandard"/>
+                        <units:AccordionItem Header="검사 실적" Tag="InspectionResult"/>
+                    </units:AccordionItem>
+                    <units:AccordionItem Header="자재 관리" IsGroup="True">
+                        <units:AccordionItem Header="입고 관리" Tag="MaterialIncome"/>
+                        <units:AccordionItem Header="출고 관리" Tag="MaterialOutcome"/>
+                        <units:AccordionItem Header="재고 현황" Tag="InventoryStatus"/>
+                    </units:AccordionItem>
+                </units:AccordionControl>
             </Border>
 
             <!-- Tab Content Area (MDI-like) -->

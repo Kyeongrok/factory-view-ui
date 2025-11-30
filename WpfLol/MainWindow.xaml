@@ -190,22 +190,22 @@
                                    Foreground="White" FontSize="18" FontWeight="Bold" Background="#1F303A"
                                    HorizontalAlignment="Stretch" Padding="20,10" Margin="0,0,0,0"/>
 
-                        <controls:AccordionControl Width="300" Height="250">
-                            <controls:AccordionItem Header="시스템 관리" IsGroup="True" IsExpanded="True">
-                                <controls:AccordionItem Header="사용자 관리"/>
-                                <controls:AccordionItem Header="권한 관리"/>
-                                <controls:AccordionItem Header="메뉴 관리"/>
-                            </controls:AccordionItem>
-                            <controls:AccordionItem Header="생산 관리" IsGroup="True">
-                                <controls:AccordionItem Header="작업 지시"/>
-                                <controls:AccordionItem Header="생산 실적"/>
-                                <controls:AccordionItem Header="불량 관리"/>
-                            </controls:AccordionItem>
-                            <controls:AccordionItem Header="품질 관리" IsGroup="True">
-                                <controls:AccordionItem Header="검사 기준"/>
-                                <controls:AccordionItem Header="검사 실적"/>
-                            </controls:AccordionItem>
-                        </controls:AccordionControl>
+                        <units:AccordionControl Width="300" Height="250">
+                            <units:AccordionItem Header="시스템 관리" IsGroup="True" IsExpanded="True">
+                                <units:AccordionItem Header="사용자 관리"/>
+                                <units:AccordionItem Header="권한 관리"/>
+                                <units:AccordionItem Header="메뉴 관리"/>
+                            </units:AccordionItem>
+                            <units:AccordionItem Header="생산 관리" IsGroup="True">
+                                <units:AccordionItem Header="작업 지시"/>
+                                <units:AccordionItem Header="생산 실적"/>
+                                <units:AccordionItem Header="불량 관리"/>
+                            </units:AccordionItem>
+                            <units:AccordionItem Header="품질 관리" IsGroup="True">
+                                <units:AccordionItem Header="검사 기준"/>
+                                <units:AccordionItem Header="검사 실적"/>
+                            </units:AccordionItem>
+                        </units:AccordionControl>
                     </StackPanel>
                 </Border>
 

@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Threading;
 using FactoryView.Models;
 using FactoryView.Services;
+using FactoryView.Support.UI.Units;
 using WpfLol.Controls;
 
 namespace FactoryView;
