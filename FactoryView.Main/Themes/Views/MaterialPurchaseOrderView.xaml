@@ -1,0 +1,249 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:views="clr-namespace:FactoryView.Main.UI.Views"
+                    xmlns:vm="clr-namespace:FactoryView.Main.Local.ViewModels">
+
+    <Style TargetType="{x:Type views:MaterialPurchaseOrderView}">
+        <Setter Property="Background" Value="#F5F5F5"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type views:MaterialPurchaseOrderView}">
+                    <Border Background="{TemplateBinding Background}" Padding="10">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <!-- 검색 영역 -->
+                                <RowDefinition Height="Auto"/>
+                                <!-- 그리드 영역 -->
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- 검색 영역 -->
+                            <Border Grid.Row="0" Background="White"
+                                    BorderBrush="#DDDDDD" BorderThickness="1"
+                                    CornerRadius="4" Padding="15" Margin="0,0,0,10">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- 발주일자 -->
+                                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Margin="0,0,20,8">
+                                        <CheckBox IsChecked="{Binding UseOrderDateSearch}"
+                                                  VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                        <TextBlock Text="발주일자" Width="60" VerticalAlignment="Center"
+                                                   FontWeight="SemiBold" Foreground="#333333"/>
+                                        <DatePicker SelectedDate="{Binding StartOrderDate}" Width="120"
+                                                    IsEnabled="{Binding UseOrderDateSearch}"/>
+                                        <TextBlock Text="~" Margin="5,0" VerticalAlignment="Center"/>
+                                        <DatePicker SelectedDate="{Binding EndOrderDate}" Width="120"
+                                                    IsEnabled="{Binding UseOrderDateSearch}"/>
+                                    </StackPanel>
+
+                                    <!-- 발주자 -->
+                                    <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Margin="0,0,20,8">
+                                        <TextBlock Text="발주자" Width="50" VerticalAlignment="Center"
+                                                   FontWeight="SemiBold" Foreground="#333333"/>
+                                        <ComboBox Width="150" Text="{Binding OrderUser}"/>
+                                    </StackPanel>
+
+                                    <!-- 구매처 -->
+                                    <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" Margin="0,0,20,8">
+                                        <TextBlock Text="구매처" Width="50" VerticalAlignment="Center"
+                                                   FontWeight="SemiBold" Foreground="#333333"/>
+                                        <ComboBox Width="150" Text="{Binding CompId}"/>
+                                    </StackPanel>
+
+                                    <!-- 납기일자 -->
+                                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Margin="0,0,20,0">
+                                        <CheckBox IsChecked="{Binding UseDueDateSearch}"
+                                                  VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                        <TextBlock Text="납기일자" Width="60" VerticalAlignment="Center"
+                                                   FontWeight="SemiBold" Foreground="#333333"/>
+                                        <DatePicker SelectedDate="{Binding StartDueDate}" Width="120"
+                                                    IsEnabled="{Binding UseDueDateSearch}"/>
+                                        <TextBlock Text="~" Margin="5,0" VerticalAlignment="Center"/>
+                                        <DatePicker SelectedDate="{Binding EndDueDate}" Width="120"
+                                                    IsEnabled="{Binding UseDueDateSearch}"/>
+                                    </StackPanel>
+
+                                    <!-- 검색 버튼 -->
+                                    <Button Grid.Row="0" Grid.Column="4" Grid.RowSpan="2"
+                                            Content="검색" Width="80" Height="35"
+                                            Background="#104F89" Foreground="White"
+                                            BorderThickness="0" Cursor="Hand"
+                                            Command="{Binding SearchCommand}"
+                                            VerticalAlignment="Center"/>
+                                </Grid>
+                            </Border>
+
+                            <!-- Master-Detail 그리드 영역 -->
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="5"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Master Grid: 발주정보 -->
+                                <Border Grid.Column="0" Background="White"
+                                        BorderBrush="#DDDDDD" BorderThickness="1" CornerRadius="4">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <!-- 헤더 -->
+                                        <Border Grid.Row="0" Background="#104F89" Padding="10,8">
+                                            <TextBlock Text="발주정보" Foreground="White"
+                                                       FontWeight="Bold" FontSize="14"/>
+                                        </Border>
+
+                                        <!-- 데이터 그리드 -->
+                                        <DataGrid Grid.Row="1"
+                                                  ItemsSource="{Binding OrderInfoList}"
+                                                  SelectedItem="{Binding SelectedOrderInfo}"
+                                                  AutoGenerateColumns="False"
+                                                  IsReadOnly="True"
+                                                  SelectionMode="Single"
+                                                  HeadersVisibility="Column"
+                                                  GridLinesVisibility="Horizontal"
+                                                  BorderThickness="0"
+                                                  RowHeight="30"
+                                                  ColumnHeaderHeight="30"
+                                                  AlternatingRowBackground="#F9F9F9"
+                                                  CanUserResizeRows="False">
+                                            <DataGrid.ColumnHeaderStyle>
+                                                <Style TargetType="DataGridColumnHeader">
+                                                    <Setter Property="Background" Value="#104F89"/>
+                                                    <Setter Property="Foreground" Value="White"/>
+                                                    <Setter Property="FontWeight" Value="SemiBold"/>
+                                                    <Setter Property="Padding" Value="8,0"/>
+                                                    <Setter Property="BorderBrush" Value="White"/>
+                                                    <Setter Property="BorderThickness" Value="0,0,1,0"/>
+                                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                                </Style>
+                                            </DataGrid.ColumnHeaderStyle>
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Header="PO NO." Binding="{Binding Descript}" Width="120"/>
+                                                <DataGridTextColumn Header="거래처명" Binding="{Binding CompName}" Width="100"/>
+                                                <DataGridTextColumn Header="발주일자" Binding="{Binding OrderDate, StringFormat=yyyy-MM-dd}" Width="90"/>
+                                                <DataGridTextColumn Header="발주자" Binding="{Binding OrderUser}" Width="70"/>
+                                                <DataGridTextColumn Header="납기일자" Binding="{Binding DueDate, StringFormat=yyyy-MM-dd}" Width="90"/>
+                                                <DataGridTextColumn Header="대표입고위치" Binding="{Binding IncomeLoc}" Width="100"/>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </Grid>
+                                </Border>
+
+                                <!-- Splitter -->
+                                <GridSplitter Grid.Column="1" Width="5"
+                                              HorizontalAlignment="Stretch"
+                                              Background="Transparent"/>
+
+                                <!-- Detail Grid: 발주목록 -->
+                                <Border Grid.Column="2" Background="White"
+                                        BorderBrush="#DDDDDD" BorderThickness="1" CornerRadius="4">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <!-- 헤더 -->
+                                        <Border Grid.Row="0" Background="#104F89" Padding="10,8">
+                                            <TextBlock Text="발주목록" Foreground="White"
+                                                       FontWeight="Bold" FontSize="14"/>
+                                        </Border>
+
+                                        <!-- 데이터 그리드 -->
+                                        <DataGrid Grid.Row="1"
+                                                  ItemsSource="{Binding OrderDetailList}"
+                                                  SelectedItem="{Binding SelectedOrderDetail}"
+                                                  AutoGenerateColumns="False"
+                                                  IsReadOnly="True"
+                                                  SelectionMode="Single"
+                                                  HeadersVisibility="Column"
+                                                  GridLinesVisibility="Horizontal"
+                                                  BorderThickness="0"
+                                                  RowHeight="30"
+                                                  ColumnHeaderHeight="30"
+                                                  AlternatingRowBackground="#F9F9F9"
+                                                  CanUserResizeRows="False">
+                                            <DataGrid.ColumnHeaderStyle>
+                                                <Style TargetType="DataGridColumnHeader">
+                                                    <Setter Property="Background" Value="#104F89"/>
+                                                    <Setter Property="Foreground" Value="White"/>
+                                                    <Setter Property="FontWeight" Value="SemiBold"/>
+                                                    <Setter Property="Padding" Value="8,0"/>
+                                                    <Setter Property="BorderBrush" Value="White"/>
+                                                    <Setter Property="BorderThickness" Value="0,0,1,0"/>
+                                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                                </Style>
+                                            </DataGrid.ColumnHeaderStyle>
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Header="발주번호" Binding="{Binding PoNo}" Width="100"/>
+                                                <DataGridTextColumn Header="발주자재" Binding="{Binding ItemCode}" Width="80"/>
+                                                <DataGridTextColumn Header="자재명" Binding="{Binding ItemName}" Width="120"/>
+                                                <DataGridTextColumn Header="재질" Binding="{Binding AttMatType}" Width="70"/>
+                                                <DataGridTextColumn Header="원소재공정" Binding="{Binding MatProc}" Width="80"/>
+                                                <DataGridTextColumn Header="소재경" Binding="{Binding AttDiaType}" Width="60"/>
+                                                <DataGridTextColumn Header="발주량" Binding="{Binding OrderQnt, StringFormat=N0}" Width="70">
+                                                    <DataGridTextColumn.ElementStyle>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                                                            <Setter Property="Padding" Value="0,0,8,0"/>
+                                                        </Style>
+                                                    </DataGridTextColumn.ElementStyle>
+                                                </DataGridTextColumn>
+                                                <DataGridTextColumn Header="발주단위" Binding="{Binding OrderUnit}" Width="60"/>
+                                                <DataGridTextColumn Header="납기일자" Binding="{Binding DueDate, StringFormat=yyyy-MM-dd}" Width="90"/>
+                                                <DataGridTextColumn Header="입고위치" Binding="{Binding IncomeLoc}" Width="80"/>
+                                                <DataGridTextColumn Header="구매청구번호" Binding="{Binding ReqNo}" Width="100"/>
+                                                <DataGridTextColumn Header="기준단가" Binding="{Binding PriceStd, StringFormat=N0}" Width="80">
+                                                    <DataGridTextColumn.ElementStyle>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                                                            <Setter Property="Padding" Value="0,0,8,0"/>
+                                                        </Style>
+                                                    </DataGridTextColumn.ElementStyle>
+                                                </DataGridTextColumn>
+                                                <DataGridTextColumn Header="발주단가" Binding="{Binding PriceLog, StringFormat=N0}" Width="80">
+                                                    <DataGridTextColumn.ElementStyle>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                                                            <Setter Property="Padding" Value="0,0,8,0"/>
+                                                        </Style>
+                                                    </DataGridTextColumn.ElementStyle>
+                                                </DataGridTextColumn>
+                                                <DataGridTextColumn Header="화폐단위" Binding="{Binding MoneyUnit}" Width="60"/>
+                                                <DataGridTextColumn Header="실거래액" Binding="{Binding Amount, StringFormat=N0}" Width="90">
+                                                    <DataGridTextColumn.ElementStyle>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                                                            <Setter Property="Padding" Value="0,0,8,0"/>
+                                                        </Style>
+                                                    </DataGridTextColumn.ElementStyle>
+                                                </DataGridTextColumn>
+                                                <DataGridTextColumn Header="입고완료" Binding="{Binding IncomeYN}" Width="60"/>
+                                                <DataGridTextColumn Header="비고" Binding="{Binding Description}" Width="*" MinWidth="150"/>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

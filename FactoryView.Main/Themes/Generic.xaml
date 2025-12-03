@@ -3,6 +3,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/FactoryView.Main;component/Themes/Views/MainContent.xaml"/>
+        <ResourceDictionary Source="/FactoryView.Main;component/Themes/Views/MaterialPurchaseOrderView.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

@@ -173,7 +173,7 @@
 
                         <!-- Accordion Menu (Left Side) -->
                         <Border Grid.Column="0" Background="#1F303A" BorderBrush="#2A3F4D" BorderThickness="0,0,1,0">
-                            <based:AccordionControl>
+                            <based:AccordionControl ItemClickCommand="{Binding OpenFormCommand}">
                                 <based:AccordionItem Header="System" IsGroup="True" IsExpanded="True">
                                     <based:AccordionItem Header="User Management" Tag="UserManagement"/>
                                     <based:AccordionItem Header="Role Management" Tag="RoleManagement"/>
@@ -185,6 +185,9 @@
                                 </based:AccordionItem>
                                 <based:AccordionItem Header="Quality" IsGroup="True">
                                     <based:AccordionItem Header="Inspection" Tag="Inspection"/>
+                                </based:AccordionItem>
+                                <based:AccordionItem Header="Purchase" IsGroup="True" IsExpanded="True">
+                                    <based:AccordionItem Header="구매발주" Tag="MaterialPurchaseOrder"/>
                                 </based:AccordionItem>
                             </based:AccordionControl>
                         </Border>

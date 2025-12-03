@@ -1,5 +1,6 @@
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace FactoryView.Support.UI.Units;
@@ -14,6 +15,10 @@ public class AccordionControl : TreeView
     public static readonly DependencyProperty HeaderBackgroundProperty =
         DependencyProperty.Register(nameof(HeaderBackground), typeof(Brush), typeof(AccordionControl),
             new PropertyMetadata(new SolidColorBrush(Color.FromRgb(31, 48, 58)))); // #1F303A
+
+    public static readonly DependencyProperty ItemClickCommandProperty =
+        DependencyProperty.Register(nameof(ItemClickCommand), typeof(ICommand), typeof(AccordionControl),
+            new PropertyMetadata(null));
 
     public static readonly DependencyProperty HeaderForegroundProperty =
         DependencyProperty.Register(nameof(HeaderForeground), typeof(Brush), typeof(AccordionControl),
@@ -85,6 +90,12 @@ public class AccordionControl : TreeView
         set => SetValue(IsMinimizedProperty, value);
     }
 
+    public ICommand? ItemClickCommand
+    {
+        get => (ICommand?)GetValue(ItemClickCommandProperty);
+        set => SetValue(ItemClickCommandProperty, value);
+    }
+
     #endregion
 
     static AccordionControl()
@@ -97,6 +108,16 @@ public class AccordionControl : TreeView
     {
         Background = new SolidColorBrush(Color.FromRgb(31, 48, 58)); // #1F303A
         BorderThickness = new Thickness(0);
+
+        SelectedItemChanged += OnSelectedItemChanged;
+    }
+
+    private void OnSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+    {
+        if (e.NewValue is AccordionItem item && !item.IsGroup && item.Tag != null)
+        {
+            ItemClickCommand?.Execute(item.Tag.ToString());
+        }
     }
 }
 
