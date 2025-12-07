@@ -64,99 +64,107 @@
                                         Command="{Binding ToggleAccordionCommand}"/>
                             </StackPanel>
 
-                            <!-- Menu Buttons -->
-                            <StackPanel Grid.Column="3" Orientation="Horizontal">
-                                <controls:MenuButton Content="System" MenuType="System"
-                                                     Command="{Binding MenuButtonClickCommand}"
-                                                     CommandParameter="System">
-                                    <controls:MenuButton.Icon>
-                                        <TextBlock Text="S" FontSize="24" Foreground="#B9C2D3"/>
-                                    </controls:MenuButton.Icon>
-                                    <controls:MenuButton.ActiveIcon>
-                                        <TextBlock Text="S" FontSize="24" Foreground="White"/>
-                                    </controls:MenuButton.ActiveIcon>
-                                </controls:MenuButton>
-                                <controls:MenuButton Content="Production" MenuType="Production"
-                                                     Command="{Binding MenuButtonClickCommand}"
-                                                     CommandParameter="Production">
-                                    <controls:MenuButton.Icon>
-                                        <TextBlock Text="P" FontSize="24" Foreground="#B9C2D3"/>
-                                    </controls:MenuButton.Icon>
-                                    <controls:MenuButton.ActiveIcon>
-                                        <TextBlock Text="P" FontSize="24" Foreground="White"/>
-                                    </controls:MenuButton.ActiveIcon>
-                                </controls:MenuButton>
-                                <controls:MenuButton Content="Quality" MenuType="Quality"
-                                                     Command="{Binding MenuButtonClickCommand}"
-                                                     CommandParameter="Quality">
-                                    <controls:MenuButton.Icon>
-                                        <TextBlock Text="Q" FontSize="24" Foreground="#B9C2D3"/>
-                                    </controls:MenuButton.Icon>
-                                    <controls:MenuButton.ActiveIcon>
-                                        <TextBlock Text="Q" FontSize="24" Foreground="White"/>
-                                    </controls:MenuButton.ActiveIcon>
-                                </controls:MenuButton>
-                                <controls:MenuButton Content="Material" MenuType="Material"
-                                                     Command="{Binding MenuButtonClickCommand}"
-                                                     CommandParameter="Material">
-                                    <controls:MenuButton.Icon>
-                                        <TextBlock Text="M" FontSize="24" Foreground="#B9C2D3"/>
-                                    </controls:MenuButton.Icon>
-                                    <controls:MenuButton.ActiveIcon>
-                                        <TextBlock Text="M" FontSize="24" Foreground="White"/>
-                                    </controls:MenuButton.ActiveIcon>
-                                </controls:MenuButton>
-                                <controls:MenuButton Content="Purchase" MenuType="Purchase"
-                                                     Command="{Binding MenuButtonClickCommand}"
-                                                     CommandParameter="Purchase">
-                                    <controls:MenuButton.Icon>
-                                        <TextBlock Text="$" FontSize="24" Foreground="#B9C2D3"/>
-                                    </controls:MenuButton.Icon>
-                                    <controls:MenuButton.ActiveIcon>
-                                        <TextBlock Text="$" FontSize="24" Foreground="White"/>
-                                    </controls:MenuButton.ActiveIcon>
-                                </controls:MenuButton>
-                                <controls:MenuButton Content="Equipment" MenuType="Equipment"
-                                                     Command="{Binding MenuButtonClickCommand}"
-                                                     CommandParameter="Equipment">
-                                    <controls:MenuButton.Icon>
-                                        <TextBlock Text="E" FontSize="24" Foreground="#B9C2D3"/>
-                                    </controls:MenuButton.Icon>
-                                    <controls:MenuButton.ActiveIcon>
-                                        <TextBlock Text="E" FontSize="24" Foreground="White"/>
-                                    </controls:MenuButton.ActiveIcon>
-                                </controls:MenuButton>
-                                <controls:MenuButton Content="Sales" MenuType="Sales"
-                                                     Command="{Binding MenuButtonClickCommand}"
-                                                     CommandParameter="Sales">
-                                    <controls:MenuButton.Icon>
-                                        <TextBlock Text="S" FontSize="24" Foreground="#B9C2D3"/>
-                                    </controls:MenuButton.Icon>
-                                    <controls:MenuButton.ActiveIcon>
-                                        <TextBlock Text="S" FontSize="24" Foreground="White"/>
-                                    </controls:MenuButton.ActiveIcon>
-                                </controls:MenuButton>
-                                <controls:MenuButton Content="Master" MenuType="Master"
-                                                     Command="{Binding MenuButtonClickCommand}"
-                                                     CommandParameter="Master">
-                                    <controls:MenuButton.Icon>
-                                        <TextBlock Text="M" FontSize="24" Foreground="#B9C2D3"/>
-                                    </controls:MenuButton.Icon>
-                                    <controls:MenuButton.ActiveIcon>
-                                        <TextBlock Text="M" FontSize="24" Foreground="White"/>
-                                    </controls:MenuButton.ActiveIcon>
-                                </controls:MenuButton>
-                            </StackPanel>
+                            <!-- Dynamic Menu Buttons from API -->
+                            <ItemsControl Grid.Column="3" ItemsSource="{Binding TopMenuList}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Button Content="{Binding MenuName}"
+                                                Width="80" Height="50"
+                                                Background="Transparent"
+                                                Foreground="#B9C2D3"
+                                                BorderThickness="0"
+                                                FontSize="12"
+                                                Cursor="Hand"
+                                                Command="{Binding DataContext.TopMenuClickCommand, RelativeSource={RelativeSource AncestorType=views:FactoryViewWindow}}"
+                                                CommandParameter="{Binding}">
+                                            <Button.Style>
+                                                <Style TargetType="Button">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="Button">
+                                                                <Border Background="{TemplateBinding Background}"
+                                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                                        Padding="10,5">
+                                                                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                                        <TextBlock Text="{Binding IconName, FallbackValue=M}"
+                                                                                   FontSize="20"
+                                                                                   Foreground="#B9C2D3"
+                                                                                   HorizontalAlignment="Center"/>
+                                                                        <TextBlock Text="{Binding MenuName}"
+                                                                                   FontSize="11"
+                                                                                   Foreground="#B9C2D3"
+                                                                                   HorizontalAlignment="Center"
+                                                                                   Margin="0,2,0,0"/>
+                                                                    </StackPanel>
+                                                                </Border>
+                                                                <ControlTemplate.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter Property="Background" Value="#2A3F4D"/>
+                                                                    </Trigger>
+                                                                </ControlTemplate.Triggers>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                         </Grid>
                     </Border>
 
-                    <!-- Middle Menu Bar -->
+                    <!-- Middle Menu Bar (Sub menus from selected top menu) -->
                     <Border Grid.Row="1" Background="#010A13" BorderBrush="#553D4143" BorderThickness="0,1">
-                        <StackPanel x:Name="middleMenuPanel" Orientation="Horizontal" Margin="10,0">
-                            <controls:MenuLabelControl Content="Sample Menu 1"/>
-                            <controls:MenuLabelControl Content="Sample Menu 2"/>
-                            <controls:MenuLabelControl Content="Sample Menu 3"/>
-                        </StackPanel>
+                        <ItemsControl ItemsSource="{Binding MiddleMenuList}" Margin="10,0">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Content="{Binding MenuName}"
+                                            Background="Transparent"
+                                            Foreground="#B9C2D3"
+                                            BorderThickness="0"
+                                            FontSize="13"
+                                            Padding="15,8"
+                                            Cursor="Hand"
+                                            Command="{Binding DataContext.MiddleMenuClickCommand, RelativeSource={RelativeSource AncestorType=views:FactoryViewWindow}}"
+                                            CommandParameter="{Binding}">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="Button">
+                                                            <Border x:Name="border"
+                                                                    Background="Transparent"
+                                                                    Padding="{TemplateBinding Padding}">
+                                                                <TextBlock Text="{TemplateBinding Content}"
+                                                                           Foreground="#B9C2D3"
+                                                                           VerticalAlignment="Center"/>
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                    <Setter TargetName="border" Property="Background" Value="#1A2A3A"/>
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </Border>
 
                     <!-- Sub Menu Panel -->
@@ -171,29 +179,75 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <!-- Accordion Menu (Left Side) -->
+                        <!-- Accordion Menu (Left Side) - Dynamic from API -->
                         <Border Grid.Column="0" Background="#1F303A" BorderBrush="#2A3F4D" BorderThickness="0,0,1,0">
-                            <based:AccordionControl ItemClickCommand="{Binding OpenFormCommand}">
-                                <based:AccordionItem Header="System" IsGroup="True" IsExpanded="True">
-                                    <based:AccordionItem Header="User Management" Tag="UserManagement"/>
-                                    <based:AccordionItem Header="Role Management" Tag="RoleManagement"/>
-                                    <based:AccordionItem Header="Menu Management" Tag="MenuManagement"/>
-                                </based:AccordionItem>
-                                <based:AccordionItem Header="Production" IsGroup="True">
-                                    <based:AccordionItem Header="Work Order" Tag="WorkOrder"/>
-                                    <based:AccordionItem Header="Production Result" Tag="ProductionResult"/>
-                                </based:AccordionItem>
-                                <based:AccordionItem Header="Quality" IsGroup="True">
-                                    <based:AccordionItem Header="Inspection" Tag="Inspection"/>
-                                </based:AccordionItem>
-                                <based:AccordionItem Header="Purchase" IsGroup="True" IsExpanded="True">
-                                    <based:AccordionItem Header="구매발주" Tag="MaterialPurchaseOrder"/>
-                                </based:AccordionItem>
-                            </based:AccordionControl>
+                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                <ItemsControl ItemsSource="{Binding AccordionMenuList}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Expander IsExpanded="True" Margin="0,0,0,5">
+                                                <Expander.Header>
+                                                    <TextBlock Text="{Binding MenuName}"
+                                                               Foreground="White"
+                                                               FontWeight="SemiBold"
+                                                               FontSize="14"/>
+                                                </Expander.Header>
+                                                <Expander.Style>
+                                                    <Style TargetType="Expander">
+                                                        <Setter Property="Background" Value="Transparent"/>
+                                                        <Setter Property="Foreground" Value="White"/>
+                                                        <Setter Property="BorderThickness" Value="0"/>
+                                                        <Setter Property="Padding" Value="10,8"/>
+                                                    </Style>
+                                                </Expander.Style>
+                                                <ItemsControl ItemsSource="{Binding Children}" Margin="20,5,0,0">
+                                                    <ItemsControl.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <Button Content="{Binding MenuName}"
+                                                                    Background="Transparent"
+                                                                    Foreground="#B9C2D3"
+                                                                    BorderThickness="0"
+                                                                    HorizontalContentAlignment="Left"
+                                                                    Padding="10,6"
+                                                                    Cursor="Hand"
+                                                                    Command="{Binding DataContext.MiddleMenuClickCommand, RelativeSource={RelativeSource AncestorType=views:FactoryViewWindow}}"
+                                                                    CommandParameter="{Binding}">
+                                                                <Button.Style>
+                                                                    <Style TargetType="Button">
+                                                                        <Setter Property="Template">
+                                                                            <Setter.Value>
+                                                                                <ControlTemplate TargetType="Button">
+                                                                                    <Border x:Name="border"
+                                                                                            Background="Transparent"
+                                                                                            Padding="{TemplateBinding Padding}"
+                                                                                            CornerRadius="3">
+                                                                                        <TextBlock Text="{TemplateBinding Content}"
+                                                                                                   Foreground="#B9C2D3"/>
+                                                                                    </Border>
+                                                                                    <ControlTemplate.Triggers>
+                                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                                            <Setter TargetName="border" Property="Background" Value="#2A3F4D"/>
+                                                                                        </Trigger>
+                                                                                    </ControlTemplate.Triggers>
+                                                                                </ControlTemplate>
+                                                                            </Setter.Value>
+                                                                        </Setter>
+                                                                    </Style>
+                                                                </Button.Style>
+                                                            </Button>
+                                                        </DataTemplate>
+                                                    </ItemsControl.ItemTemplate>
+                                                </ItemsControl>
+                                            </Expander>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </ScrollViewer>
                         </Border>
 
                         <!-- Main Contents -->
-                        <main:MainContents Grid.Column="1"/>
+                        <main:MainContents Grid.Column="1"
+                                           DataContext="{Binding DataContext, RelativeSource={RelativeSource AncestorType=views:FactoryViewWindow}}"/>
                     </Grid>
 
                     <!-- Status Bar -->

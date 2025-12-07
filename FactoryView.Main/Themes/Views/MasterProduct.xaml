@@ -1,0 +1,309 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:views="clr-namespace:FactoryView.Main.UI.Views"
+                    xmlns:models="clr-namespace:FactoryView.Main.Local.Models">
+
+    <!-- Boolean to Visibility Converter -->
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+
+    <Style TargetType="{x:Type views:MasterProduct}">
+        <Setter Property="Background" Value="#F5F5F5"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type views:MasterProduct}">
+                    <Border Background="{TemplateBinding Background}" Padding="10">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <!-- 검색 영역 -->
+                                <RowDefinition Height="Auto"/>
+                                <!-- 툴바 영역 -->
+                                <RowDefinition Height="Auto"/>
+                                <!-- 그리드 영역 -->
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- 검색 영역 -->
+                            <Border Grid.Row="0" Background="White"
+                                    BorderBrush="#DDDDDD" BorderThickness="1"
+                                    CornerRadius="4" Padding="15" Margin="0,0,0,10">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- 제품코드 -->
+                                    <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="0,0,20,0">
+                                        <TextBlock Text="제품코드" Width="60" VerticalAlignment="Center"
+                                                   FontWeight="SemiBold" Foreground="#333333"/>
+                                        <TextBox Width="150" Height="28"
+                                                 Text="{Binding SearchItemCode, UpdateSourceTrigger=PropertyChanged}"
+                                                 VerticalContentAlignment="Center" Padding="5,0"/>
+                                    </StackPanel>
+
+                                    <!-- 제품명 -->
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,0,20,0">
+                                        <TextBlock Text="제품명" Width="50" VerticalAlignment="Center"
+                                                   FontWeight="SemiBold" Foreground="#333333"/>
+                                        <TextBox Width="150" Height="28"
+                                                 Text="{Binding SearchItemName, UpdateSourceTrigger=PropertyChanged}"
+                                                 VerticalContentAlignment="Center" Padding="5,0"/>
+                                    </StackPanel>
+
+                                    <!-- 사용여부 -->
+                                    <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="0,0,20,0">
+                                        <TextBlock Text="사용여부" Width="60" VerticalAlignment="Center"
+                                                   FontWeight="SemiBold" Foreground="#333333"/>
+                                        <ComboBox Width="80" Height="28" SelectedValue="{Binding SearchUsed}"
+                                                  SelectedValuePath="Tag">
+                                            <ComboBoxItem Content="전체" Tag=""/>
+                                            <ComboBoxItem Content="사용" Tag="Y" IsSelected="True"/>
+                                            <ComboBoxItem Content="미사용" Tag="N"/>
+                                        </ComboBox>
+                                    </StackPanel>
+
+                                    <!-- 검색 버튼 -->
+                                    <Button Grid.Column="4"
+                                            Content="조회" Width="80" Height="30"
+                                            Background="#104F89" Foreground="White"
+                                            BorderThickness="0" Cursor="Hand"
+                                            Command="{Binding SearchCommand}"
+                                            VerticalAlignment="Center"/>
+                                </Grid>
+                            </Border>
+
+                            <!-- 툴바 영역 -->
+                            <Border Grid.Row="1" Background="White"
+                                    BorderBrush="#DDDDDD" BorderThickness="1"
+                                    CornerRadius="4" Padding="10,8" Margin="0,0,0,10">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <Button Content="추가" Width="70" Height="28" Margin="0,0,5,0"
+                                            Background="#28A745" Foreground="White"
+                                            BorderThickness="0" Cursor="Hand"
+                                            Command="{Binding AddCommand}"/>
+                                    <Button Content="저장" Width="70" Height="28" Margin="0,0,5,0"
+                                            Background="#104F89" Foreground="White"
+                                            BorderThickness="0" Cursor="Hand"
+                                            Command="{Binding SaveCommand}"/>
+                                    <Button Content="엑셀" Width="70" Height="28"
+                                            Background="#217346" Foreground="White"
+                                            BorderThickness="0" Cursor="Hand"
+                                            Command="{Binding ExcelExportCommand}"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- 그리드 영역 -->
+                            <Border Grid.Row="2" Background="White"
+                                    BorderBrush="#DDDDDD" BorderThickness="1" CornerRadius="4">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <!-- 헤더 -->
+                                    <Border Grid.Row="0" Background="#104F89" Padding="10,8">
+                                        <TextBlock Text="제품 목록" Foreground="White"
+                                                   FontWeight="Bold" FontSize="14"/>
+                                    </Border>
+
+                                    <!-- 데이터 그리드 -->
+                                    <DataGrid Grid.Row="1"
+                                              ItemsSource="{Binding ProductList}"
+                                              SelectedItem="{Binding SelectedProduct}"
+                                              AutoGenerateColumns="False"
+                                              CanUserAddRows="False"
+                                              CanUserDeleteRows="False"
+                                              SelectionMode="Extended"
+                                              SelectionUnit="FullRow"
+                                              HeadersVisibility="Column"
+                                              GridLinesVisibility="All"
+                                              BorderThickness="0"
+                                              RowHeight="30"
+                                              ColumnHeaderHeight="32"
+                                              AlternatingRowBackground="#F9F9F9"
+                                              CanUserResizeRows="False"
+                                              HorizontalGridLinesBrush="#E0E0E0"
+                                              VerticalGridLinesBrush="#E0E0E0">
+
+                                        <!-- 컬럼 헤더 스타일 -->
+                                        <DataGrid.ColumnHeaderStyle>
+                                            <Style TargetType="DataGridColumnHeader">
+                                                <Setter Property="Background" Value="#104F89"/>
+                                                <Setter Property="Foreground" Value="White"/>
+                                                <Setter Property="FontWeight" Value="SemiBold"/>
+                                                <Setter Property="Padding" Value="8,0"/>
+                                                <Setter Property="BorderBrush" Value="White"/>
+                                                <Setter Property="BorderThickness" Value="0,0,1,0"/>
+                                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                            </Style>
+                                        </DataGrid.ColumnHeaderStyle>
+
+                                        <!-- 행 스타일 (상태별 배경색) -->
+                                        <DataGrid.RowStyle>
+                                            <Style TargetType="DataGridRow">
+                                                <Setter Property="Background" Value="White"/>
+                                                <Style.Triggers>
+                                                    <!-- Insert 상태: 녹색 -->
+                                                    <DataTrigger Binding="{Binding RowState}" Value="{x:Static models:RowState.Insert}">
+                                                        <Setter Property="Background" Value="#B7F0B1"/>
+                                                    </DataTrigger>
+                                                    <!-- Update 상태: 노랑 -->
+                                                    <DataTrigger Binding="{Binding RowState}" Value="{x:Static models:RowState.Update}">
+                                                        <Setter Property="Background" Value="#FAED7D"/>
+                                                    </DataTrigger>
+                                                    <!-- 선택된 행 -->
+                                                    <Trigger Property="IsSelected" Value="True">
+                                                        <Setter Property="Background" Value="#CDE6F7"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </DataGrid.RowStyle>
+
+                                        <!-- 셀 스타일 -->
+                                        <DataGrid.CellStyle>
+                                            <Style TargetType="DataGridCell">
+                                                <Setter Property="Padding" Value="5,0"/>
+                                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                                <Setter Property="BorderThickness" Value="0"/>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsSelected" Value="True">
+                                                        <Setter Property="Background" Value="Transparent"/>
+                                                        <Setter Property="Foreground" Value="Black"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </DataGrid.CellStyle>
+
+                                        <DataGrid.Columns>
+                                            <!-- 선택 체크박스 -->
+                                            <DataGridTemplateColumn Header="선택" Width="50">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <CheckBox IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}"
+                                                                  HorizontalAlignment="Center"/>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+
+                                            <!-- 제품코드 -->
+                                            <DataGridTextColumn Header="제품코드" Binding="{Binding ItemCode, UpdateSourceTrigger=PropertyChanged}" Width="120"/>
+
+                                            <!-- 제품명 -->
+                                            <DataGridTextColumn Header="제품명" Binding="{Binding ItemName, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
+
+                                            <!-- 제품유형 -->
+                                            <DataGridTemplateColumn Header="제품유형" Width="100">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <ComboBox SelectedValue="{Binding PrdtType, UpdateSourceTrigger=PropertyChanged}"
+                                                                  SelectedValuePath="Tag" BorderThickness="0" Background="Transparent">
+                                                            <ComboBoxItem Content="완제품" Tag="ITM001001"/>
+                                                            <ComboBoxItem Content="반제품" Tag="ITM001002"/>
+                                                            <ComboBoxItem Content="부품" Tag="ITM001003"/>
+                                                        </ComboBox>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+
+                                            <!-- 제품분류 -->
+                                            <DataGridTextColumn Header="제품분류" Binding="{Binding PrdtCtg, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+
+                                            <!-- 제품그룹 -->
+                                            <DataGridTextColumn Header="제품그룹" Binding="{Binding PrdtGroup, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+
+                                            <!-- 재질유형 -->
+                                            <DataGridTextColumn Header="재질유형" Binding="{Binding AttMatType, UpdateSourceTrigger=PropertyChanged}" Width="90"/>
+
+                                            <!-- 규격유형 -->
+                                            <DataGridTextColumn Header="규격유형" Binding="{Binding AttStdType, UpdateSourceTrigger=PropertyChanged}" Width="90"/>
+
+                                            <!-- 직경유형 -->
+                                            <DataGridTextColumn Header="직경유형" Binding="{Binding AttDiaType, UpdateSourceTrigger=PropertyChanged}" Width="90"/>
+
+                                            <!-- 배치사이즈 -->
+                                            <DataGridTextColumn Header="배치사이즈" Binding="{Binding BatchSize, UpdateSourceTrigger=PropertyChanged}" Width="80">
+                                                <DataGridTextColumn.ElementStyle>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="HorizontalAlignment" Value="Right"/>
+                                                        <Setter Property="Padding" Value="0,0,8,0"/>
+                                                    </Style>
+                                                </DataGridTextColumn.ElementStyle>
+                                            </DataGridTextColumn>
+
+                                            <!-- LOT 사이즈 -->
+                                            <DataGridTextColumn Header="LOT사이즈" Binding="{Binding LotSize, UpdateSourceTrigger=PropertyChanged}" Width="80">
+                                                <DataGridTextColumn.ElementStyle>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="HorizontalAlignment" Value="Right"/>
+                                                        <Setter Property="Padding" Value="0,0,8,0"/>
+                                                    </Style>
+                                                </DataGridTextColumn.ElementStyle>
+                                            </DataGridTextColumn>
+
+                                            <!-- 안전재고 -->
+                                            <DataGridTextColumn Header="안전재고" Binding="{Binding SafetyQnt, UpdateSourceTrigger=PropertyChanged}" Width="80">
+                                                <DataGridTextColumn.ElementStyle>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="HorizontalAlignment" Value="Right"/>
+                                                        <Setter Property="Padding" Value="0,0,8,0"/>
+                                                    </Style>
+                                                </DataGridTextColumn.ElementStyle>
+                                            </DataGridTextColumn>
+
+                                            <!-- 납기일수 -->
+                                            <DataGridTextColumn Header="납기일수" Binding="{Binding DeliveryTime, UpdateSourceTrigger=PropertyChanged}" Width="70">
+                                                <DataGridTextColumn.ElementStyle>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="HorizontalAlignment" Value="Right"/>
+                                                        <Setter Property="Padding" Value="0,0,8,0"/>
+                                                    </Style>
+                                                </DataGridTextColumn.ElementStyle>
+                                            </DataGridTextColumn>
+
+                                            <!-- 재고유형 -->
+                                            <DataGridTemplateColumn Header="재고관리" Width="80">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <ComboBox SelectedValue="{Binding InvType, UpdateSourceTrigger=PropertyChanged}"
+                                                                  SelectedValuePath="Tag" BorderThickness="0" Background="Transparent">
+                                                            <ComboBoxItem Content="Y" Tag="Y"/>
+                                                            <ComboBoxItem Content="N" Tag="N"/>
+                                                        </ComboBox>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+
+                                            <!-- 사용여부 -->
+                                            <DataGridTemplateColumn Header="사용여부" Width="80">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <ComboBox SelectedValue="{Binding Used, UpdateSourceTrigger=PropertyChanged}"
+                                                                  SelectedValuePath="Tag" BorderThickness="0" Background="Transparent">
+                                                            <ComboBoxItem Content="사용" Tag="Y"/>
+                                                            <ComboBoxItem Content="미사용" Tag="N"/>
+                                                        </ComboBox>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+
+                                    <!-- 로딩 오버레이 -->
+                                    <Border Grid.Row="1" Background="#80000000" Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <TextBlock Text="로딩 중..." Foreground="White" FontSize="16"/>
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

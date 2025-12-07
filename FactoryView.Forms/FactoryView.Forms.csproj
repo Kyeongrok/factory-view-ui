@@ -9,6 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\FactoryView.Api\FactoryView.Api.csproj" />
       <ProjectReference Include="..\FactoryView.Main\FactoryView.Main.csproj" />
       <ProjectReference Include="..\FactoryView.Support\FactoryView.Support.csproj" />
       <ProjectReference Include="..\WpfLol\WpfLol.csproj" />

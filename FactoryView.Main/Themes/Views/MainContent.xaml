@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:views="clr-namespace:FactoryView.Main.UI.Views">
 
-    <!-- FormName에 따라 View를 선택하는 DataTemplateSelector 대신 ContentControl + Trigger 사용 -->
+    <!-- Dashboard Template -->
     <DataTemplate x:Key="DashboardTemplate">
         <Grid Background="#F5F5F5">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -20,10 +20,22 @@
         </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="MaterialPurchaseOrderTemplate">
+    <!-- MaterialPurchaseOrderView Template -->
+    <DataTemplate x:Key="MaterialPurchaseOrderViewTemplate">
         <views:MaterialPurchaseOrderView/>
     </DataTemplate>
 
+    <!-- MasterProduct Template -->
+    <DataTemplate x:Key="MasterProductTemplate">
+        <views:MasterProduct/>
+    </DataTemplate>
+
+    <!-- SystemMenu Template -->
+    <DataTemplate x:Key="SystemMenuTemplate">
+        <views:SystemMenu/>
+    </DataTemplate>
+
+    <!-- Default Form Template -->
     <DataTemplate x:Key="DefaultFormTemplate">
         <Grid Background="#F5F5F5">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -76,13 +88,25 @@
                                                         Content="{Binding}"
                                                         ContentTemplate="{StaticResource DefaultFormTemplate}"/>
                                         <DataTemplate.Triggers>
+                                            <!-- Dashboard -->
                                             <DataTrigger Binding="{Binding FormName}" Value="Dashboard">
                                                 <Setter TargetName="formContent" Property="ContentTemplate"
                                                         Value="{StaticResource DashboardTemplate}"/>
                                             </DataTrigger>
-                                            <DataTrigger Binding="{Binding FormName}" Value="MaterialPurchaseOrder">
+                                            <!-- MaterialPurchaseOrderView -->
+                                            <DataTrigger Binding="{Binding FormName}" Value="MaterialPurchaseOrderView">
                                                 <Setter TargetName="formContent" Property="ContentTemplate"
-                                                        Value="{StaticResource MaterialPurchaseOrderTemplate}"/>
+                                                        Value="{StaticResource MaterialPurchaseOrderViewTemplate}"/>
+                                            </DataTrigger>
+                                            <!-- MasterProduct -->
+                                            <DataTrigger Binding="{Binding FormName}" Value="MasterProduct">
+                                                <Setter TargetName="formContent" Property="ContentTemplate"
+                                                        Value="{StaticResource MasterProductTemplate}"/>
+                                            </DataTrigger>
+                                            <!-- SystemMenu -->
+                                            <DataTrigger Binding="{Binding FormName}" Value="SystemMenu">
+                                                <Setter TargetName="formContent" Property="ContentTemplate"
+                                                        Value="{StaticResource SystemMenuTemplate}"/>
                                             </DataTrigger>
                                         </DataTemplate.Triggers>
                                     </DataTemplate>
