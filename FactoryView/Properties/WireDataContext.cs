@@ -10,6 +10,8 @@ internal class WireDataContext : ViewModelLocationScenario
     protected override void Match(ViewModelLocatorCollection items)
     {
         items.Register<FactoryViewWindow, FactoryViewWindowViewModel>();
+        items.Register<TopMenuContent, NavigationViewModel>();
+        items.Register<MiddleMenuContent, NavigationViewModel>();
         items.Register<NavigationContents, NavigationViewModel>();
     }
 }
