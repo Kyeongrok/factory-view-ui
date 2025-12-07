@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
@@ -10,7 +10,12 @@
 
     <ItemGroup>
         <ProjectReference Include="..\FactoryView.Forms\FactoryView.Forms.csproj" />
+        <ProjectReference Include="..\FactoryView.Navigation\FactoryView.Navigation.csproj" />
         <ProjectReference Include="..\WpfLol\WpfLol.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Prism.Unity" Version="8.1.97" />
     </ItemGroup>
 
 </Project>

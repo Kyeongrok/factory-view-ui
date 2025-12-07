@@ -1,6 +1,6 @@
-﻿using System.Windows;
-using FactoryView.Forms.UI.ViewModels;
+using System.Windows;
 using FactoryView.Support.UI.Units;
+using Prism.Mvvm;
 
 namespace FactoryView.Forms.UI.Views;
 
@@ -14,6 +14,6 @@ public class FactoryViewWindow : DarkWindow
 
     public FactoryViewWindow()
     {
-        DataContext = new FactoryViewWindowViewModel();
+        ViewModelLocator.SetAutoWireViewModel(this, true);
     }
 }

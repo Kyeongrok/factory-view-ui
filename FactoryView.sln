@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactoryView.Main", "Factory
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactoryView.Api", "FactoryView.Api\FactoryView.Api.csproj", "{3C709C79-1885-4C56-B2B0-4043875E2CCB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactoryView.Navigation", "FactoryView.Navigation\FactoryView.Navigation.csproj", "{5A5F54A3-E24C-4092-87F1-0B6682FEEAEB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{3C709C79-1885-4C56-B2B0-4043875E2CCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C709C79-1885-4C56-B2B0-4043875E2CCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C709C79-1885-4C56-B2B0-4043875E2CCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A5F54A3-E24C-4092-87F1-0B6682FEEAEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A5F54A3-E24C-4092-87F1-0B6682FEEAEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A5F54A3-E24C-4092-87F1-0B6682FEEAEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A5F54A3-E24C-4092-87F1-0B6682FEEAEB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
