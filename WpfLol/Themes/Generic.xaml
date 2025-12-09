@@ -3,6 +3,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:WpfLol.Controls">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/WpfLol;component/Themes/Units/FvGridControl.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
     <!-- MenuButton Style -->
     <Style TargetType="{x:Type controls:MenuButton}">
         <Setter Property="Width" Value="78"/>
@@ -517,75 +521,6 @@
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <!-- FvGridControl Style (데이터 그리드) -->
-    <Style TargetType="{x:Type controls:FvGridControl}">
-        <Setter Property="Background" Value="White"/>
-        <Setter Property="BorderBrush" Value="#D0D0D0"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="RowHeaderWidth" Value="40"/>
-        <Setter Property="AlternatingRowBackground" Value="#F5F5F5"/>
-        <Setter Property="GridLinesVisibility" Value="All"/>
-        <Setter Property="HorizontalGridLinesBrush" Value="#E0E0E0"/>
-        <Setter Property="VerticalGridLinesBrush" Value="#E0E0E0"/>
-        <Setter Property="ColumnHeaderStyle">
-            <Setter.Value>
-                <Style TargetType="DataGridColumnHeader">
-                    <Setter Property="Background" Value="#F0F0F0"/>
-                    <Setter Property="Foreground" Value="#323232"/>
-                    <Setter Property="FontWeight" Value="Bold"/>
-                    <Setter Property="Padding" Value="8,6"/>
-                    <Setter Property="BorderBrush" Value="#D0D0D0"/>
-                    <Setter Property="BorderThickness" Value="0,0,1,1"/>
-                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                </Style>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="RowHeaderStyle">
-            <Setter.Value>
-                <Style TargetType="DataGridRowHeader">
-                    <Setter Property="Background" Value="#F0F0F0"/>
-                    <Setter Property="Foreground" Value="#666666"/>
-                    <Setter Property="FontSize" Value="11"/>
-                    <Setter Property="Width" Value="40"/>
-                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                    <Setter Property="VerticalContentAlignment" Value="Center"/>
-                    <Setter Property="BorderBrush" Value="#D0D0D0"/>
-                    <Setter Property="BorderThickness" Value="0,0,1,1"/>
-                </Style>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="CellStyle">
-            <Setter.Value>
-                <Style TargetType="DataGridCell">
-                    <Setter Property="Padding" Value="8,4"/>
-                    <Setter Property="BorderThickness" Value="0"/>
-                    <Style.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="#104F89"/>
-                            <Setter Property="Foreground" Value="White"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="RowStyle">
-            <Setter.Value>
-                <Style TargetType="DataGridRow">
-                    <Setter Property="Background" Value="White"/>
-                    <Style.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="#104F89"/>
-                            <Setter Property="Foreground" Value="White"/>
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#E8F4FC"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
             </Setter.Value>
         </Setter>
     </Style>
