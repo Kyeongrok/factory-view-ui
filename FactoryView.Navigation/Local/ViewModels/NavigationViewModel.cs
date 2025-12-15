@@ -9,10 +9,14 @@ using FactoryView.Api.System;
 
 namespace FactoryView.Navigation.Local.ViewModels;
 
-public partial class NavigationViewModel : ObservableObject, IRecipient<MenuChangedMessage>
+public partial class NavigationViewModel : ObservableObject,
+    IRecipient<MenuChangedMessage>,
+    IRecipient<LanguageChangedMessage>
 {
     private readonly FactoryDbContext _dbContext;
     private readonly MenuInfoApi _menuInfoApi;
+    private readonly LabelInfoApi _labelInfoApi;
+    private Dictionary<string, SYS100_LABELS> _labelCache = new();
 
     [ObservableProperty]
     private string _activeMenuType = string.Empty;
@@ -42,14 +46,16 @@ public partial class NavigationViewModel : ObservableObject, IRecipient<MenuChan
         // SQLite DbContext 사용 (개발용)
         _dbContext = DbContextFactory.CreateSqliteContext();
         _menuInfoApi = new MenuInfoApi(_dbContext);
+        _labelInfoApi = new LabelInfoApi(_dbContext);
 
         // DB 초기화 및 시딩
         DbContextFactory.InitializeDatabase(_dbContext);
 
-        // 메뉴 변경 메시지 구독
-        WeakReferenceMessenger.Default.Register(this);
+        // 메시지 구독 (메뉴 변경, 언어 변경)
+        WeakReferenceMessenger.Default.Register<MenuChangedMessage>(this);
+        WeakReferenceMessenger.Default.Register<LanguageChangedMessage>(this);
 
-        _ = LoadMenuAsync();
+        _ = LoadLabelsAndMenuAsync();
     }
 
     /// <summary>
@@ -57,7 +63,34 @@ public partial class NavigationViewModel : ObservableObject, IRecipient<MenuChan
     /// </summary>
     public void Receive(MenuChangedMessage message)
     {
+        _ = LoadLabelsAndMenuAsync();
+    }
+
+    /// <summary>
+    /// 언어 변경 메시지 수신 시 메뉴 다시 로드
+    /// </summary>
+    public void Receive(LanguageChangedMessage message)
+    {
         _ = LoadMenuAsync();
+    }
+
+    private async Task LoadLabelsAndMenuAsync()
+    {
+        await LoadLabelsAsync();
+        await LoadMenuAsync();
+    }
+
+    private async Task LoadLabelsAsync()
+    {
+        try
+        {
+            var labels = await _labelInfoApi.GetByTypeAsync("MENU");
+            _labelCache = labels.ToDictionary(l => l.LabelKR ?? l.LabelCode, l => l);
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Label load failed: {ex.Message}");
+        }
     }
 
     private async Task LoadMenuAsync()
@@ -92,10 +125,13 @@ public partial class NavigationViewModel : ObservableObject, IRecipient<MenuChan
 
     private MenuItem EntityToMenuItem(SYS200_MENUS entity)
     {
+        // 라벨 번역 적용
+        var menuName = GetTranslatedLabel(entity.LabelCode);
+
         var menuItem = new MenuItem
         {
             MenuId = entity.MenuId,
-            MenuName = entity.LabelCode ?? string.Empty,
+            MenuName = menuName,
             ParentId = entity.ParentMenuId,
             MenuLevel = GetMenuLevel(entity.MenuType),
             SortOrder = entity.MenuSeq ?? 0,
@@ -113,6 +149,31 @@ public partial class NavigationViewModel : ObservableObject, IRecipient<MenuChan
         }
 
         return menuItem;
+    }
+
+    /// <summary>
+    /// 현재 언어에 맞는 라벨 텍스트 반환
+    /// </summary>
+    private string GetTranslatedLabel(string? labelCode)
+    {
+        if (string.IsNullOrEmpty(labelCode))
+            return string.Empty;
+
+        // 라벨 캐시에서 검색 (LabelKR 기준으로 키가 저장됨)
+        if (_labelCache.TryGetValue(labelCode, out var label))
+        {
+            var currentLang = LanguageService.Instance.CurrentLanguage;
+            return currentLang switch
+            {
+                "EN" => label.LabelEN ?? labelCode,
+                "CH" => label.LabelCH ?? labelCode,
+                "JP" => label.LabelJP ?? labelCode,
+                _ => label.LabelKR ?? labelCode
+            };
+        }
+
+        // 캐시에 없으면 원래 값 반환
+        return labelCode;
     }
 
     private int GetMenuLevel(string? menuType)

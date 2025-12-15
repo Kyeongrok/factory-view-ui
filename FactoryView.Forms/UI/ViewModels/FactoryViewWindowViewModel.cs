@@ -4,6 +4,7 @@ using System.Windows.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FactoryView.Api.System;
+using FactoryView.Forms.UI.Views;
 using FactoryView.Navigation.Local.ViewModels;
 
 namespace FactoryView.Forms.UI.ViewModels;
@@ -85,7 +86,11 @@ public partial class FactoryViewWindowViewModel : ObservableObject
     [RelayCommand]
     private void Settings()
     {
-        MessageBox.Show("Settings dialog will open here.", "Settings", MessageBoxButton.OK, MessageBoxImage.Information);
+        var settingsPopup = new SettingsPopup
+        {
+            Owner = Application.Current.MainWindow
+        };
+        settingsPopup.ShowDialog();
     }
 
     [RelayCommand]
