@@ -6,6 +6,7 @@
         <ResourceDictionary Source="/FactoryView.Main;component/Themes/Views/MaterialPurchaseOrderView.xaml"/>
         <ResourceDictionary Source="/FactoryView.Main;component/Themes/Views/MasterProduct.xaml"/>
         <ResourceDictionary Source="/FactoryView.Main;component/Themes/Views/SystemMenu.xaml"/>
+        <ResourceDictionary Source="/FactoryView.Main;component/Themes/Views/LabelInfo.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

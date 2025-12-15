@@ -1,0 +1,114 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:views="clr-namespace:FactoryView.Main.UI.Views"
+                    xmlns:units="clr-namespace:FactoryView.Support.UI.Units;assembly=FactoryView.Support">
+
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+
+    <Style TargetType="{x:Type views:LabelInfo}">
+        <Setter Property="Background" Value="#F5F5F5"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type views:LabelInfo}">
+                    <Border Background="{TemplateBinding Background}" Padding="10">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <!-- 툴바 영역 -->
+                                <RowDefinition Height="Auto"/>
+                                <!-- 그리드 영역 -->
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- 툴바 영역 -->
+                            <Border Grid.Row="0" Background="White"
+                                    BorderBrush="#DDDDDD" BorderThickness="1"
+                                    CornerRadius="4" Padding="10,8" Margin="0,0,0,10">
+                                <StackPanel Orientation="Horizontal">
+                                    <!-- 타입 필터 -->
+                                    <TextBlock Text="타입:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                    <ComboBox Width="100" Height="28"
+                                              ItemsSource="{Binding LabelTypes}"
+                                              SelectedItem="{Binding SelectedLabelType}"
+                                              Margin="0,0,10,0"/>
+
+                                    <!-- 검색어 -->
+                                    <TextBlock Text="검색:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                    <TextBox Width="150" Height="28"
+                                             Text="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}"
+                                             Margin="0,0,10,0"/>
+
+                                    <Button Content="조회" Width="70" Height="28"
+                                            Background="#104F89" Foreground="White"
+                                            BorderThickness="0" Cursor="Hand"
+                                            Command="{Binding SearchCommand}"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- 그리드 영역 -->
+                            <Border Grid.Row="1" Background="White"
+                                    BorderBrush="#DDDDDD" BorderThickness="1" CornerRadius="4">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <!-- 헤더 -->
+                                    <Border Grid.Row="0" Background="#104F89" Padding="10,8">
+                                        <TextBlock Text="라벨 관리" Foreground="White"
+                                                   FontWeight="Bold" FontSize="14"/>
+                                    </Border>
+
+                                    <!-- 버튼 영역 -->
+                                    <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5" HorizontalAlignment="Right">
+                                        <Button Content="+" Width="28" Height="24" Margin="2,0"
+                                                Background="#28A745" Foreground="White" BorderThickness="0"
+                                                Command="{Binding AddCommand}" ToolTip="추가"/>
+                                        <Button Content="-" Width="28" Height="24" Margin="2,0"
+                                                Background="#DC3545" Foreground="White" BorderThickness="0"
+                                                Command="{Binding DeleteCommand}" ToolTip="삭제"/>
+                                        <Button Content="저장" Width="50" Height="24" Margin="2,0"
+                                                Background="#104F89" Foreground="White" BorderThickness="0"
+                                                Command="{Binding SaveCommand}"/>
+                                    </StackPanel>
+
+                                    <!-- 데이터 그리드 -->
+                                    <units:FvDataGrid Grid.Row="2"
+                                                     ItemsSource="{Binding LabelList}"
+                                                     SelectedItem="{Binding SelectedLabel}">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="라벨코드" Binding="{Binding LabelCode, UpdateSourceTrigger=PropertyChanged}" Width="120"/>
+                                            <DataGridComboBoxColumn Header="타입" SelectedItemBinding="{Binding LabelType, UpdateSourceTrigger=PropertyChanged}" Width="80">
+                                                <DataGridComboBoxColumn.ItemsSource>
+                                                    <x:Array Type="sys:String" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                                        <sys:String>MENU</sys:String>
+                                                        <sys:String>BUTTON</sys:String>
+                                                        <sys:String>COLUMN</sys:String>
+                                                        <sys:String>MESSAGE</sys:String>
+                                                    </x:Array>
+                                                </DataGridComboBoxColumn.ItemsSource>
+                                            </DataGridComboBoxColumn>
+                                            <DataGridTextColumn Header="한국어" Binding="{Binding LabelKR, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
+                                            <DataGridTextColumn Header="영어" Binding="{Binding LabelEN, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
+                                            <DataGridTextColumn Header="중국어" Binding="{Binding LabelCH, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+                                            <DataGridTextColumn Header="일본어" Binding="{Binding LabelJP, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+                                            <DataGridTextColumn Header="설명" Binding="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+                                        </DataGrid.Columns>
+                                    </units:FvDataGrid>
+                                </Grid>
+                            </Border>
+
+                            <!-- 로딩 오버레이 -->
+                            <Border Grid.RowSpan="2" Background="#80000000"
+                                    Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <TextBlock Text="로딩 중..." Foreground="White" FontSize="16"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

@@ -23,6 +23,9 @@ public class FactoryDbContext : DbContext
     /// <summary>메뉴 마스터</summary>
     public DbSet<SYS100_MENUS> Menus { get; set; }
 
+    /// <summary>언어 라벨 정보 (SYS100)</summary>
+    public DbSet<SYS100_LABELS> Labels { get; set; }
+
     /// <summary>메뉴 정보 (SYS200)</summary>
     public DbSet<SYS200_MENUS> MenuInfos { get; set; }
 
@@ -144,11 +147,54 @@ public static class DbContextFactory
         // DB 생성 (없으면)
         context.Database.EnsureCreated();
 
+        // SYS100 라벨 데이터가 없으면 초기 데이터 삽입
+        if (!context.Labels.Any())
+        {
+            SeedLabelData(context);
+        }
+
         // SYS200 메뉴 데이터가 없으면 초기 데이터 삽입
         if (!context.MenuInfos.Any())
         {
             SeedMenuData(context);
         }
+    }
+
+    private static void SeedLabelData(FactoryDbContext context)
+    {
+        var labels = new List<SYS100_LABELS>
+        {
+            // 메뉴 라벨
+            new SYS100_LABELS { LabelCode = "LBL_MASTER", LabelType = "MENU", LabelKR = "기준정보", LabelEN = "Master", LabelCH = "基础信息", LabelJP = "基準情報" },
+            new SYS100_LABELS { LabelCode = "LBL_PURCHASE", LabelType = "MENU", LabelKR = "구매관리", LabelEN = "Purchase", LabelCH = "采购管理", LabelJP = "購買管理" },
+            new SYS100_LABELS { LabelCode = "LBL_PRODUCTION", LabelType = "MENU", LabelKR = "생산관리", LabelEN = "Production", LabelCH = "生产管理", LabelJP = "生産管理" },
+            new SYS100_LABELS { LabelCode = "LBL_SYSTEM", LabelType = "MENU", LabelKR = "시스템관리", LabelEN = "System", LabelCH = "系统管理", LabelJP = "システム管理" },
+            new SYS100_LABELS { LabelCode = "LBL_PRODUCT_MASTER", LabelType = "MENU", LabelKR = "제품 마스터", LabelEN = "Product Master", LabelCH = "产品主数据", LabelJP = "製品マスター" },
+            new SYS100_LABELS { LabelCode = "LBL_MATERIAL_MASTER", LabelType = "MENU", LabelKR = "자재 마스터", LabelEN = "Material Master", LabelCH = "物料主数据", LabelJP = "資材マスター" },
+            new SYS100_LABELS { LabelCode = "LBL_COMPANY_MASTER", LabelType = "MENU", LabelKR = "거래처 마스터", LabelEN = "Company Master", LabelCH = "客户主数据", LabelJP = "取引先マスター" },
+            new SYS100_LABELS { LabelCode = "LBL_MATERIAL_PO", LabelType = "MENU", LabelKR = "자재 구매발주", LabelEN = "Material PO", LabelCH = "物料采购订单", LabelJP = "資材発注" },
+            new SYS100_LABELS { LabelCode = "LBL_MENU_MGMT", LabelType = "MENU", LabelKR = "메뉴 관리", LabelEN = "Menu Management", LabelCH = "菜单管理", LabelJP = "メニュー管理" },
+            new SYS100_LABELS { LabelCode = "LBL_USER_MGMT", LabelType = "MENU", LabelKR = "사용자 관리", LabelEN = "User Management", LabelCH = "用户管理", LabelJP = "ユーザー管理" },
+            new SYS100_LABELS { LabelCode = "LBL_LABEL_MGMT", LabelType = "MENU", LabelKR = "라벨 관리", LabelEN = "Label Management", LabelCH = "标签管理", LabelJP = "ラベル管理" },
+
+            // 공통 버튼 라벨
+            new SYS100_LABELS { LabelCode = "BTN_SEARCH", LabelType = "BUTTON", LabelKR = "조회", LabelEN = "Search", LabelCH = "查询", LabelJP = "検索" },
+            new SYS100_LABELS { LabelCode = "BTN_SAVE", LabelType = "BUTTON", LabelKR = "저장", LabelEN = "Save", LabelCH = "保存", LabelJP = "保存" },
+            new SYS100_LABELS { LabelCode = "BTN_DELETE", LabelType = "BUTTON", LabelKR = "삭제", LabelEN = "Delete", LabelCH = "删除", LabelJP = "削除" },
+            new SYS100_LABELS { LabelCode = "BTN_ADD", LabelType = "BUTTON", LabelKR = "추가", LabelEN = "Add", LabelCH = "添加", LabelJP = "追加" },
+            new SYS100_LABELS { LabelCode = "BTN_CANCEL", LabelType = "BUTTON", LabelKR = "취소", LabelEN = "Cancel", LabelCH = "取消", LabelJP = "キャンセル" },
+            new SYS100_LABELS { LabelCode = "BTN_CONFIRM", LabelType = "BUTTON", LabelKR = "확인", LabelEN = "Confirm", LabelCH = "确认", LabelJP = "確認" },
+            new SYS100_LABELS { LabelCode = "BTN_CLOSE", LabelType = "BUTTON", LabelKR = "닫기", LabelEN = "Close", LabelCH = "关闭", LabelJP = "閉じる" },
+
+            // 공통 컬럼 라벨
+            new SYS100_LABELS { LabelCode = "COL_SEQ", LabelType = "COLUMN", LabelKR = "순번", LabelEN = "Seq", LabelCH = "序号", LabelJP = "順番" },
+            new SYS100_LABELS { LabelCode = "COL_MENU_ID", LabelType = "COLUMN", LabelKR = "메뉴ID", LabelEN = "Menu ID", LabelCH = "菜单ID", LabelJP = "メニューID" },
+            new SYS100_LABELS { LabelCode = "COL_LABEL_CODE", LabelType = "COLUMN", LabelKR = "라벨코드", LabelEN = "Label Code", LabelCH = "标签代码", LabelJP = "ラベルコード" },
+            new SYS100_LABELS { LabelCode = "COL_DESCRIPTION", LabelType = "COLUMN", LabelKR = "설명", LabelEN = "Description", LabelCH = "描述", LabelJP = "説明" }
+        };
+
+        context.Labels.AddRange(labels);
+        context.SaveChanges();
     }
 
     private static void SeedMenuData(FactoryDbContext context)
@@ -271,6 +317,17 @@ public static class DbContextFactory
                 ParentMenuId = "M005",
                 MenuSeq = 2,
                 Description = "SystemUser"
+            },
+            new SYS200_MENUS
+            {
+                MenuId = "M005003",
+                LabelCode = "라벨 관리",
+                ModType = "MES",
+                MenuType = "TPS008002",
+                DisplayYN = 0,
+                ParentMenuId = "M005",
+                MenuSeq = 3,
+                Description = "LabelInfo"
             }
         };
 

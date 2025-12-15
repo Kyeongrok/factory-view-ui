@@ -36,6 +36,11 @@
         <views:SystemMenu/>
     </DataTemplate>
 
+    <!-- LabelInfo Template -->
+    <DataTemplate x:Key="LabelInfoTemplate">
+        <views:LabelInfo/>
+    </DataTemplate>
+
     <!-- Default Form Template -->
     <DataTemplate x:Key="DefaultFormTemplate">
         <Grid Background="#F5F5F5">
@@ -94,6 +99,11 @@
                                             <DataTrigger Binding="{Binding FormName}" Value="SystemMenu">
                                                 <Setter TargetName="formContent" Property="ContentTemplate"
                                                         Value="{StaticResource SystemMenuTemplate}"/>
+                                            </DataTrigger>
+                                            <!-- LabelInfo -->
+                                            <DataTrigger Binding="{Binding FormName}" Value="LabelInfo">
+                                                <Setter TargetName="formContent" Property="ContentTemplate"
+                                                        Value="{StaticResource LabelInfoTemplate}"/>
                                             </DataTrigger>
                                         </DataTemplate.Triggers>
                                     </DataTemplate>

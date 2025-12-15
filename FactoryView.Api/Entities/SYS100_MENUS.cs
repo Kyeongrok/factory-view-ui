@@ -7,7 +7,7 @@ namespace FactoryView.Api.Entities;
 /// 메뉴 마스터 (Menus)
 /// 시스템 메뉴 구조 정보
 /// </summary>
-[Table("SYS100")]
+[Table("SYS_MENUS")]
 public class SYS100_MENUS
 {
     /// <summary>메뉴 ID (PK)</summary>
