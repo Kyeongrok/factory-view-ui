@@ -164,15 +164,28 @@ public static class DbContextFactory
     {
         var labels = new List<SYS100_LABELS>
         {
-            // 메뉴 라벨
-            new SYS100_LABELS { LabelCode = "LBL_MASTER", LabelType = "MENU", LabelKR = "기준정보", LabelEN = "Master", LabelCH = "基础信息", LabelJP = "基準情報" },
+            // 대메뉴 라벨
+            new SYS100_LABELS { LabelCode = "LBL_MASTER", LabelType = "MENU", LabelKR = "기준정보관리", LabelEN = "Master Data", LabelCH = "基础信息管理", LabelJP = "基準情報管理" },
             new SYS100_LABELS { LabelCode = "LBL_PURCHASE", LabelType = "MENU", LabelKR = "구매관리", LabelEN = "Purchase", LabelCH = "采购管理", LabelJP = "購買管理" },
             new SYS100_LABELS { LabelCode = "LBL_PRODUCTION", LabelType = "MENU", LabelKR = "생산관리", LabelEN = "Production", LabelCH = "生产管理", LabelJP = "生産管理" },
             new SYS100_LABELS { LabelCode = "LBL_SYSTEM", LabelType = "MENU", LabelKR = "시스템관리", LabelEN = "System", LabelCH = "系统管理", LabelJP = "システム管理" },
-            new SYS100_LABELS { LabelCode = "LBL_PRODUCT_MASTER", LabelType = "MENU", LabelKR = "제품 마스터", LabelEN = "Product Master", LabelCH = "产品主数据", LabelJP = "製品マスター" },
-            new SYS100_LABELS { LabelCode = "LBL_MATERIAL_MASTER", LabelType = "MENU", LabelKR = "자재 마스터", LabelEN = "Material Master", LabelCH = "物料主数据", LabelJP = "資材マスター" },
-            new SYS100_LABELS { LabelCode = "LBL_COMPANY_MASTER", LabelType = "MENU", LabelKR = "거래처 마스터", LabelEN = "Company Master", LabelCH = "客户主数据", LabelJP = "取引先マスター" },
+
+            // 기준정보관리 하위 메뉴 라벨
+            new SYS100_LABELS { LabelCode = "LBL_CODE_MGMT", LabelType = "MENU", LabelKR = "코드관리", LabelEN = "Code Management", LabelCH = "代码管理", LabelJP = "コード管理" },
+            new SYS100_LABELS { LabelCode = "LBL_ITEM_INFO", LabelType = "MENU", LabelKR = "품목정보관리", LabelEN = "Item Information", LabelCH = "物品信息管理", LabelJP = "品目情報管理" },
+            new SYS100_LABELS { LabelCode = "LBL_PROCESS_MGMT", LabelType = "MENU", LabelKR = "공정관리", LabelEN = "Process Management", LabelCH = "工序管理", LabelJP = "工程管理" },
+            new SYS100_LABELS { LabelCode = "LBL_COMPANY_INFO", LabelType = "MENU", LabelKR = "거래처정보관리", LabelEN = "Company Information", LabelCH = "客户信息管理", LabelJP = "取引先情報管理" },
+            new SYS100_LABELS { LabelCode = "LBL_EMPLOYEE_INFO", LabelType = "MENU", LabelKR = "인원정보관리", LabelEN = "Employee Information", LabelCH = "人员信息管理", LabelJP = "人員情報管理" },
+            new SYS100_LABELS { LabelCode = "LBL_EQUIPMENT_INFO", LabelType = "MENU", LabelKR = "설비정보관리", LabelEN = "Equipment Information", LabelCH = "设备信息管理", LabelJP = "設備情報管理" },
+            new SYS100_LABELS { LabelCode = "LBL_MFG_PROCESS", LabelType = "MENU", LabelKR = "제조공정관리", LabelEN = "Manufacturing Process", LabelCH = "制造工序管理", LabelJP = "製造工程管理" },
+            new SYS100_LABELS { LabelCode = "LBL_QUALITY_STD", LabelType = "MENU", LabelKR = "품질기준관리", LabelEN = "Quality Standards", LabelCH = "质量标准管理", LabelJP = "品質基準管理" },
+            new SYS100_LABELS { LabelCode = "LBL_WORK_SCHEDULE", LabelType = "MENU", LabelKR = "작업일정관리", LabelEN = "Work Schedule", LabelCH = "作业日程管理", LabelJP = "作業日程管理" },
+            new SYS100_LABELS { LabelCode = "LBL_MGMT_PLAN", LabelType = "MENU", LabelKR = "관리계획정보", LabelEN = "Management Plan", LabelCH = "管理计划信息", LabelJP = "管理計画情報" },
+
+            // 구매관리 하위 메뉴 라벨
             new SYS100_LABELS { LabelCode = "LBL_MATERIAL_PO", LabelType = "MENU", LabelKR = "자재 구매발주", LabelEN = "Material PO", LabelCH = "物料采购订单", LabelJP = "資材発注" },
+
+            // 시스템관리 하위 메뉴 라벨
             new SYS100_LABELS { LabelCode = "LBL_MENU_MGMT", LabelType = "MENU", LabelKR = "메뉴 관리", LabelEN = "Menu Management", LabelCH = "菜单管理", LabelJP = "メニュー管理" },
             new SYS100_LABELS { LabelCode = "LBL_USER_MGMT", LabelType = "MENU", LabelKR = "사용자 관리", LabelEN = "User Management", LabelCH = "用户管理", LabelJP = "ユーザー管理" },
             new SYS100_LABELS { LabelCode = "LBL_LABEL_MGMT", LabelType = "MENU", LabelKR = "라벨 관리", LabelEN = "Label Management", LabelCH = "标签管理", LabelJP = "ラベル管理" },
@@ -251,35 +264,112 @@ public static class DbContextFactory
             new SYS200_MENUS
             {
                 MenuId = "M001001",
-                LabelCode = "제품 마스터",
+                LabelCode = "코드관리",
                 ModType = "MES",
                 MenuType = "TPS008002",
                 DisplayYN = 0,
                 ParentMenuId = "M001",
                 MenuSeq = 1,
-                Description = "MasterProduct"
+                Description = "CodeInfo"
             },
             new SYS200_MENUS
             {
                 MenuId = "M001002",
-                LabelCode = "자재 마스터",
+                LabelCode = "품목정보관리",
                 ModType = "MES",
                 MenuType = "TPS008002",
                 DisplayYN = 0,
                 ParentMenuId = "M001",
                 MenuSeq = 2,
-                Description = "MasterMaterial"
+                Description = "ItemInfo"
             },
             new SYS200_MENUS
             {
                 MenuId = "M001003",
-                LabelCode = "거래처 마스터",
+                LabelCode = "공정관리",
                 ModType = "MES",
                 MenuType = "TPS008002",
                 DisplayYN = 0,
                 ParentMenuId = "M001",
                 MenuSeq = 3,
-                Description = "MasterCompany"
+                Description = "ProcessInfo"
+            },
+            new SYS200_MENUS
+            {
+                MenuId = "M001004",
+                LabelCode = "거래처정보관리",
+                ModType = "MES",
+                MenuType = "TPS008002",
+                DisplayYN = 0,
+                ParentMenuId = "M001",
+                MenuSeq = 4,
+                Description = "CompanyInfo"
+            },
+            new SYS200_MENUS
+            {
+                MenuId = "M001005",
+                LabelCode = "인원정보관리",
+                ModType = "MES",
+                MenuType = "TPS008002",
+                DisplayYN = 0,
+                ParentMenuId = "M001",
+                MenuSeq = 5,
+                Description = "EmployeeInfo"
+            },
+            new SYS200_MENUS
+            {
+                MenuId = "M001006",
+                LabelCode = "설비정보관리",
+                ModType = "MES",
+                MenuType = "TPS008002",
+                DisplayYN = 0,
+                ParentMenuId = "M001",
+                MenuSeq = 6,
+                Description = "EquipmentInfo"
+            },
+            new SYS200_MENUS
+            {
+                MenuId = "M001007",
+                LabelCode = "제조공정관리",
+                ModType = "MES",
+                MenuType = "TPS008002",
+                DisplayYN = 0,
+                ParentMenuId = "M001",
+                MenuSeq = 7,
+                Description = "ManufacturingProcessInfo"
+            },
+            new SYS200_MENUS
+            {
+                MenuId = "M001008",
+                LabelCode = "품질기준관리",
+                ModType = "MES",
+                MenuType = "TPS008002",
+                DisplayYN = 0,
+                ParentMenuId = "M001",
+                MenuSeq = 8,
+                Description = "QualityStandardInfo"
+            },
+            new SYS200_MENUS
+            {
+                MenuId = "M001009",
+                LabelCode = "작업일정관리",
+                ModType = "MES",
+                MenuType = "TPS008002",
+                DisplayYN = 0,
+                ParentMenuId = "M001",
+                MenuSeq = 9,
+                Description = "WorkScheduleInfo"
+            },
+            new SYS200_MENUS
+            {
+                MenuId = "M001010",
+                LabelCode = "관리계획정보",
+                ModType = "MES",
+                MenuType = "TPS008002",
+                DisplayYN = 0,
+                ParentMenuId = "M001",
+                MenuSeq = 10,
+                Description = "ManagementPlanInfo"
             },
 
             // 중메뉴 (Level 2) - 구매관리
