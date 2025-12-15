@@ -47,6 +47,7 @@
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="*"/>
                                         </Grid.RowDefinitions>
 
@@ -55,15 +56,33 @@
                                                        FontWeight="Bold" FontSize="14"/>
                                         </Border>
 
-                                        <DataGrid Grid.Row="1"
+                                        <!-- 대메뉴 버튼 -->
+                                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5" HorizontalAlignment="Right">
+                                            <Button Content="+" Width="28" Height="24" Margin="2,0"
+                                                    Background="#28A745" Foreground="White" BorderThickness="0"
+                                                    Command="{Binding AddLevel1Command}" ToolTip="추가"/>
+                                            <Button Content="-" Width="28" Height="24" Margin="2,0"
+                                                    Background="#DC3545" Foreground="White" BorderThickness="0"
+                                                    Command="{Binding DeleteLevel1Command}" ToolTip="삭제"/>
+                                            <Button Content="Up" Width="35" Height="24" Margin="2,0"
+                                                    Background="#6C757D" Foreground="White" BorderThickness="0"
+                                                    Command="{Binding MoveUpLevel1Command}" ToolTip="위로"/>
+                                            <Button Content="Dn" Width="35" Height="24" Margin="2,0"
+                                                    Background="#6C757D" Foreground="White" BorderThickness="0"
+                                                    Command="{Binding MoveDownLevel1Command}" ToolTip="아래로"/>
+                                            <Button Content="저장" Width="50" Height="24" Margin="2,0"
+                                                    Background="#104F89" Foreground="White" BorderThickness="0"
+                                                    Command="{Binding SaveLevel1Command}"/>
+                                        </StackPanel>
+
+                                        <DataGrid Grid.Row="2"
                                                   ItemsSource="{Binding Level1MenuList}"
                                                   SelectedItem="{Binding SelectedLevel1Menu}"
                                                   AutoGenerateColumns="False"
-                                                  IsReadOnly="True"
                                                   CanUserAddRows="False"
                                                   SelectionMode="Single"
                                                   HeadersVisibility="Column"
-                                                  GridLinesVisibility="Horizontal"
+                                                  GridLinesVisibility="All"
                                                   BorderThickness="0"
                                                   RowHeight="28"
                                                   ColumnHeaderHeight="30"
@@ -78,10 +97,20 @@
                                                     <Setter Property="BorderThickness" Value="0,0,1,1"/>
                                                 </Style>
                                             </DataGrid.ColumnHeaderStyle>
+                                            <DataGrid.RowStyle>
+                                                <Style TargetType="DataGridRow">
+                                                    <Setter Property="Background" Value="White"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding RowState}" Value="{x:Static models:RowState.Insert}">
+                                                            <Setter Property="Background" Value="#B7F0B1"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </DataGrid.RowStyle>
                                             <DataGrid.Columns>
-                                                <DataGridTextColumn Header="순번" Binding="{Binding MenuSeq}" Width="50"/>
-                                                <DataGridTextColumn Header="메뉴ID" Binding="{Binding MenuId}" Width="80"/>
-                                                <DataGridTextColumn Header="메뉴명" Binding="{Binding LabelKR}" Width="*"/>
+                                                <DataGridTextColumn Header="순번" Binding="{Binding MenuSeq}" Width="50" IsReadOnly="True"/>
+                                                <DataGridTextColumn Header="메뉴ID" Binding="{Binding MenuId, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+                                                <DataGridTextColumn Header="라벨코드" Binding="{Binding LabelCode, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
                                             </DataGrid.Columns>
                                         </DataGrid>
                                     </Grid>
@@ -158,8 +187,8 @@
                                             <DataGrid.Columns>
                                                 <DataGridTextColumn Header="순번" Binding="{Binding MenuSeq}" Width="50" IsReadOnly="True"/>
                                                 <DataGridTextColumn Header="메뉴ID" Binding="{Binding MenuId, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
-                                                <DataGridTextColumn Header="메뉴명" Binding="{Binding LabelKR, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
-                                                <DataGridTextColumn Header="폼이름" Binding="{Binding FormName, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+                                                <DataGridTextColumn Header="라벨코드" Binding="{Binding LabelCode, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+                                                <DataGridTextColumn Header="설명" Binding="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
                                             </DataGrid.Columns>
                                         </DataGrid>
                                     </Grid>
@@ -236,8 +265,8 @@
                                             <DataGrid.Columns>
                                                 <DataGridTextColumn Header="순번" Binding="{Binding MenuSeq}" Width="50" IsReadOnly="True"/>
                                                 <DataGridTextColumn Header="메뉴ID" Binding="{Binding MenuId, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
-                                                <DataGridTextColumn Header="메뉴명" Binding="{Binding LabelKR, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
-                                                <DataGridTextColumn Header="폼이름" Binding="{Binding FormName, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+                                                <DataGridTextColumn Header="라벨코드" Binding="{Binding LabelCode, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+                                                <DataGridTextColumn Header="설명" Binding="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
                                             </DataGrid.Columns>
                                         </DataGrid>
                                     </Grid>

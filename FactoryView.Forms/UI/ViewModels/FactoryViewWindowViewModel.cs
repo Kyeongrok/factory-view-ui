@@ -4,12 +4,12 @@ using System.Windows.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FactoryView.Api.System;
+using FactoryView.Navigation.Local.ViewModels;
 
 namespace FactoryView.Forms.UI.ViewModels;
 
 public partial class FactoryViewWindowViewModel : ObservableObject
 {
-    private readonly MenuApi _menuApi = new();
     private DispatcherTimer? _timer;
 
     [ObservableProperty]
@@ -20,9 +20,6 @@ public partial class FactoryViewWindowViewModel : ObservableObject
 
     [ObservableProperty]
     private string _userInfo = "User: Guest";
-
-    [ObservableProperty]
-    private string _activeMenuType = string.Empty;
 
     [ObservableProperty]
     private bool _isAccordionVisible = true;
@@ -36,71 +33,30 @@ public partial class FactoryViewWindowViewModel : ObservableObject
     [ObservableProperty]
     private TabItemModel? _selectedTab;
 
-    /// <summary>대메뉴 목록 (Top Menu Bar)</summary>
+    /// <summary>네비게이션 ViewModel (메뉴 관리)</summary>
     [ObservableProperty]
-    private ObservableCollection<MenuItem> _topMenuList = new();
-
-    /// <summary>선택된 대메뉴의 하위 메뉴 (Middle Menu Bar)</summary>
-    [ObservableProperty]
-    private ObservableCollection<MenuItem> _middleMenuList = new();
-
-    /// <summary>Accordion 메뉴 목록</summary>
-    [ObservableProperty]
-    private ObservableCollection<MenuItem> _accordionMenuList = new();
+    private NavigationViewModel _navigation;
 
     public FactoryViewWindowViewModel()
     {
+        // NavigationViewModel 인스턴스 생성 (한 번만)
+        _navigation = new NavigationViewModel();
+
+        // 메뉴 선택 이벤트 구독
+        _navigation.MenuSelected += OnMenuSelected;
+
         StartTimer();
 
-        // 메뉴 로드
-        _ = LoadMenuAsync();
-
-        // 기본 자재 구매발주 탭 추가
+        // 기본 탭 추가
         Tabs.Add(new TabItemModel { Header = "자재 구매발주", FormName = "MaterialPurchaseOrderView", Content = null });
         SelectedTab = Tabs.FirstOrDefault();
     }
 
-    /// <summary>
-    /// 메뉴 데이터 로드
-    /// </summary>
-    private async Task LoadMenuAsync()
+    private void OnMenuSelected(object? sender, MenuItem menu)
     {
-        try
+        if (!string.IsNullOrEmpty(menu.ViewName))
         {
-            var menuList = await _menuApi.GetMenuListAsync();
-
-            TopMenuList.Clear();
-            AccordionMenuList.Clear();
-
-            foreach (var menu in menuList)
-            {
-                TopMenuList.Add(menu);
-                AccordionMenuList.Add(menu);
-            }
-
-            // 첫 번째 메뉴 선택
-            if (TopMenuList.Count > 0)
-            {
-                ActiveMenuType = TopMenuList[0].MenuId;
-                LoadMiddleMenu(TopMenuList[0]);
-            }
-        }
-        catch (Exception ex)
-        {
-            StatusMessage = $"메뉴 로드 실패: {ex.Message}";
-        }
-    }
-
-    /// <summary>
-    /// 중메뉴 로드
-    /// </summary>
-    private void LoadMiddleMenu(MenuItem parentMenu)
-    {
-        MiddleMenuList.Clear();
-
-        foreach (var child in parentMenu.Children)
-        {
-            MiddleMenuList.Add(child);
+            OpenFormWithHeader(menu.ViewName, menu.MenuName);
         }
     }
 
@@ -140,29 +96,6 @@ public partial class FactoryViewWindowViewModel : ObservableObject
     }
 
     /// <summary>
-    /// 대메뉴 클릭 (Top Menu Bar)
-    /// </summary>
-    [RelayCommand]
-    private void TopMenuClick(MenuItem menu)
-    {
-        ActiveMenuType = menu.MenuId;
-        LoadMiddleMenu(menu);
-        StatusMessage = $"Selected: {menu.MenuName}";
-    }
-
-    /// <summary>
-    /// 중메뉴 클릭 (Middle Menu Bar)
-    /// </summary>
-    [RelayCommand]
-    private void MiddleMenuClick(MenuItem menu)
-    {
-        if (!string.IsNullOrEmpty(menu.ViewName))
-        {
-            OpenFormWithHeader(menu.ViewName, menu.MenuName);
-        }
-    }
-
-    /// <summary>
     /// 폼 열기 (Header 지정)
     /// </summary>
     private void OpenFormWithHeader(string formName, string header)
@@ -186,13 +119,6 @@ public partial class FactoryViewWindowViewModel : ObservableObject
         Tabs.Add(newTab);
         SelectedTab = newTab;
         StatusMessage = $"Opened: {header}";
-    }
-
-    [RelayCommand]
-    private void MenuButtonClick(string menuType)
-    {
-        ActiveMenuType = menuType;
-        StatusMessage = $"Selected: {menuType}";
     }
 
     [RelayCommand]
@@ -227,11 +153,6 @@ public partial class FactoryViewWindowViewModel : ObservableObject
         {
             Tabs.Remove(tab);
         }
-    }
-
-    private object CreateDashboardContent()
-    {
-        return "Dashboard";
     }
 
     private object CreateFormContent(string formName)
