@@ -4,80 +4,71 @@
 
     <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
 
-    <!-- 닫기 버튼 스타일 -->
-    <Style x:Key="TabCloseButtonStyle" TargetType="Button">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Foreground" Value="#808080"/>
-        <Setter Property="FontSize" Value="12"/>
-        <Setter Property="Width" Value="20"/>
-        <Setter Property="Height" Value="20"/>
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Border x:Name="Border"
-                            Background="{TemplateBinding Background}"
-                            CornerRadius="2"
-                            Width="{TemplateBinding Width}"
-                            Height="{TemplateBinding Height}">
-                        <TextBlock Text="X"
-                                   FontSize="{TemplateBinding FontSize}"
-                                   Foreground="{TemplateBinding Foreground}"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"/>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Border" Property="Background" Value="#3F3F46"/>
-                            <Setter Property="Foreground" Value="#FFFFFF"/>
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="Border" Property="Background" Value="#FF5555"/>
-                            <Setter Property="Foreground" Value="#FFFFFF"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+    <!-- 공용 텍스트/버튼 배경 리소스 -->
+    <SolidColorBrush x:Key="TextPrimary" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="TextSecondary" Color="#FFCFCFD0"/>
+    <SolidColorBrush x:Key="CloseHoverBackground" Color="#3A3A3C"/>
+    <SolidColorBrush x:Key="ClosePressedBackground" Color="#2F2F31"/>
 
-    <!-- TabItem 스타일 (다크 테마) -->
+    <!-- 색상 팔레트 -->
+    <Color x:Key="HeaderBackgroundColor">#FF2A2C2E</Color>
+    <Color x:Key="TabNormalColor">#FF333436</Color>
+    <Color x:Key="TabHoverColor">#FF3E4043</Color>
+    <Color x:Key="TabSelectedColor">#FF1F2022</Color>
+    <Color x:Key="ContentBackgroundColor">#FF151617</Color>
+    <Color x:Key="SeparatorColor">#FF202020</Color>
+
+    <SolidColorBrush x:Key="HeaderBackground" Color="{StaticResource HeaderBackgroundColor}"/>
+    <SolidColorBrush x:Key="TabNormal" Color="{StaticResource TabNormalColor}"/>
+    <SolidColorBrush x:Key="TabHover" Color="{StaticResource TabHoverColor}"/>
+    <SolidColorBrush x:Key="TabSelected" Color="{StaticResource TabSelectedColor}"/>
+    <SolidColorBrush x:Key="ContentBackground" Color="{StaticResource ContentBackgroundColor}"/>
+    <SolidColorBrush x:Key="SeparatorBrush" Color="{StaticResource SeparatorColor}"/>
+
+    <!-- TabItem 스타일: 통일된 색상, 모서리, 선택 시 강조 -->
     <Style x:Key="FvTabItemStyle" TargetType="TabItem">
-        <Setter Property="Background" Value="#3C3C3C"/>
-        <Setter Property="Foreground" Value="#CCCCCC"/>
+        <Setter Property="Background" Value="{StaticResource TabNormal}"/>
+        <Setter Property="Foreground" Value="{StaticResource TextSecondary}"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Padding" Value="0"/>
-        <Setter Property="Margin" Value="4,4,0,0"/>
+        <Setter Property="Padding" Value="12,0"/>
+        <Setter Property="Margin" Value="6,6,0,0"/>
         <Setter Property="MinWidth" Value="120"/>
-        <Setter Property="Height" Value="28"/>
+        <Setter Property="Height" Value="34"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TabItem">
                     <Border x:Name="Border"
                             Background="{TemplateBinding Background}"
                             BorderThickness="0"
-                            CornerRadius="6,6,0,0"
-                            Padding="12,0">
+                            CornerRadius="8,8,8,0"
+                            Padding="{TemplateBinding Padding}">
                         <ContentPresenter x:Name="ContentSite"
                                           ContentSource="Header"
                                           HorizontalAlignment="Left"
-                                          VerticalAlignment="Center"/>
+                                          VerticalAlignment="Center"
+                                          RecognizesAccessKey="True"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="Border" Property="Background" Value="#1E1E1E"/>
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource TabSelected}"/>
+                            <Setter TargetName="Border" Property="Margin" Value="6,2,0,0"/>
+                            <Setter Property="Panel.ZIndex" Value="2"/>
+                            <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+                            <Setter TargetName="Border" Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect BlurRadius="8" ShadowDepth="1" Color="#20000000"/>
+                                </Setter.Value>
+                            </Setter>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Border" Property="Background" Value="#505050"/>
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource TabHover}"/>
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsSelected" Value="True"/>
                                 <Condition Property="IsMouseOver" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="Border" Property="Background" Value="#1E1E1E"/>
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource TabSelected}"/>
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -85,11 +76,11 @@
         </Setter>
     </Style>
 
-    <!-- FvTabControl 메인 스타일 (다크 테마) -->
+    <!-- FvTabControl 메인 스타일: 헤더 바 정리, 구분선, 콘텐츠 패딩 -->
     <Style TargetType="{x:Type units:FvTabControl}">
-        <Setter Property="Background" Value="#1E1E1E"/>
+        <Setter Property="Background" Value="{StaticResource ContentBackground}"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Padding" Value="8"/>
         <Setter Property="ItemContainerStyle" Value="{StaticResource FvTabItemStyle}"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -99,20 +90,22 @@
                           ClipToBounds="True">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="1"/> <!-- separator -->
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
                         <!-- Tab Header Panel -->
                         <Border Grid.Row="0"
-                                Background="#2D2D30"
+                                Background="{StaticResource HeaderBackground}"
+                                Padding="8,0,8,2"
                                 BorderThickness="0">
-                            <DockPanel>
+                            <DockPanel LastChildFill="True">
                                 <!-- 새 탭 버튼 -->
                                 <Button DockPanel.Dock="Right"
                                         Content="+"
                                         Width="32" Height="32"
                                         Background="Transparent"
-                                        Foreground="#808080"
+                                        Foreground="#A0A0A0"
                                         BorderThickness="0"
                                         FontSize="16"
                                         Cursor="Hand"
@@ -120,7 +113,7 @@
                                         Visibility="{Binding ShowAddButton, RelativeSource={RelativeSource AncestorType=units:FvTabControl}, Converter={StaticResource BoolToVisConverter}}">
                                     <Button.Template>
                                         <ControlTemplate TargetType="Button">
-                                            <Border x:Name="Border" Background="{TemplateBinding Background}">
+                                            <Border x:Name="Border" Background="{TemplateBinding Background}" CornerRadius="4">
                                                 <TextBlock Text="{TemplateBinding Content}"
                                                            FontSize="{TemplateBinding FontSize}"
                                                            Foreground="{TemplateBinding Foreground}"
@@ -129,7 +122,7 @@
                                             </Border>
                                             <ControlTemplate.Triggers>
                                                 <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter TargetName="Border" Property="Background" Value="#3F3F46"/>
+                                                    <Setter TargetName="Border" Property="Background" Value="#3B3B3D"/>
                                                     <Setter Property="Foreground" Value="#FFFFFF"/>
                                                 </Trigger>
                                             </ControlTemplate.Triggers>
@@ -145,11 +138,15 @@
                             </DockPanel>
                         </Border>
 
+                        <!-- 구분선 -->
+                        <Border Grid.Row="1" Background="{StaticResource SeparatorBrush}" Height="1"/>
+
                         <!-- Tab Content -->
                         <Border x:Name="ContentPanel"
-                                Grid.Row="1"
+                                Grid.Row="2"
                                 Background="{TemplateBinding Background}"
                                 BorderThickness="0"
+                                Padding="12"
                                 KeyboardNavigation.TabNavigation="Local"
                                 KeyboardNavigation.DirectionalNavigation="Contained"
                                 KeyboardNavigation.TabIndex="2">
@@ -165,21 +162,23 @@
         <Setter Property="ItemTemplate">
             <Setter.Value>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <TextBlock x:Name="HeaderText"
                                    Text="{Binding Header}"
                                    VerticalAlignment="Center"
-                                   Foreground="#CCCCCC"/>
-                        <Button x:Name="CloseBtn"
-                                Style="{StaticResource TabCloseButtonStyle}"
-                                Margin="12,0,0,0"
-                                Command="{Binding DataContext.CloseTabCommand, RelativeSource={RelativeSource AncestorType=units:FvTabControl}}"
-                                CommandParameter="{Binding FormName}"
-                                Visibility="{Binding DataContext.ShowCloseButton, RelativeSource={RelativeSource AncestorType=units:FvTabControl}, Converter={StaticResource BoolToVisConverter}}"/>
+                                   Foreground="{StaticResource TextSecondary}"
+                                   FontSize="13"
+                                   Margin="0,0,8,0"/>
+                        <units:TabCloseButton x:Name="CloseBtn"
+                                              Margin="6,0,0,0"
+                                              Command="{Binding DataContext.CloseTabCommand, RelativeSource={RelativeSource AncestorType=units:FvTabControl}}"
+                                              CommandParameter="{Binding FormName}"
+                                              Visibility="{Binding DataContext.ShowCloseButton, RelativeSource={RelativeSource AncestorType=units:FvTabControl}, Converter={StaticResource BoolToVisConverter}}"/>
                     </StackPanel>
                     <DataTemplate.Triggers>
                         <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=TabItem}}" Value="True">
-                            <Setter TargetName="HeaderText" Property="Foreground" Value="#FFFFFF"/>
+                            <Setter TargetName="HeaderText" Property="Foreground" Value="{StaticResource TextPrimary}"/>
+                            <Setter TargetName="HeaderText" Property="FontWeight" Value="SemiBold"/>
                         </DataTrigger>
                     </DataTemplate.Triggers>
                 </DataTemplate>
