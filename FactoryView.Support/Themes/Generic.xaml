@@ -9,6 +9,7 @@
         <ResourceDictionary Source="/FactoryView.Support;component/Themes/Units/TabCloseButton.xaml"/>
         <ResourceDictionary Source="/FactoryView.Support;component/Themes/Units/FvTabControl.xaml"/>
         <ResourceDictionary Source="/FactoryView.Support;component/Themes/Units/DarkWindow.xaml"/>
+        <ResourceDictionary Source="/FactoryView.Support;component/Themes/Units/LogoArea.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

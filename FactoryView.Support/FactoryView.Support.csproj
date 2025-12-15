@@ -9,6 +9,7 @@
 
     <ItemGroup>
       <PackageReference Include="Jamesnet.Wpf" Version="1.0.0.113" />
+      <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="5.0.0" />
     </ItemGroup>
 
 </Project>
