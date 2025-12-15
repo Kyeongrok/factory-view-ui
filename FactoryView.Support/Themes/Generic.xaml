@@ -5,6 +5,7 @@
         <ResourceDictionary Source="/FactoryView.Support;component/Themes/Units/AccordionControl.xaml"/>
         <ResourceDictionary Source="/FactoryView.Support;component/Themes/Units/CloseButton.xaml"/>
         <ResourceDictionary Source="/FactoryView.Support;component/Themes/Units/FVButton.xaml"/>
+        <ResourceDictionary Source="/FactoryView.Support;component/Themes/Units/FvDataGrid.xaml"/>
         <ResourceDictionary Source="/FactoryView.Support;component/Themes/Units/DarkWindow.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
