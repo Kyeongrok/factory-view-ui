@@ -146,7 +146,7 @@
                                 Grid.Row="2"
                                 Background="{TemplateBinding Background}"
                                 BorderThickness="0"
-                                Padding="12"
+                                Padding="0"
                                 KeyboardNavigation.TabNavigation="Local"
                                 KeyboardNavigation.DirectionalNavigation="Contained"
                                 KeyboardNavigation.TabIndex="2">
