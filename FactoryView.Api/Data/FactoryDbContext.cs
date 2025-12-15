@@ -173,6 +173,15 @@ public static class DbContextFactory
             // 기준정보관리 하위 메뉴 라벨
             new SYS100_LABELS { LabelCode = "LBL_CODE_MGMT", LabelType = "MENU", LabelKR = "코드관리", LabelEN = "Code Management", LabelCH = "代码管理", LabelJP = "コード管理" },
             new SYS100_LABELS { LabelCode = "LBL_ITEM_INFO", LabelType = "MENU", LabelKR = "품목정보관리", LabelEN = "Item Information", LabelCH = "物品信息管理", LabelJP = "品目情報管理" },
+
+            // 품목정보관리 하위 메뉴 라벨 (Level 3)
+            new SYS100_LABELS { LabelCode = "LBL_PRODUCT_INFO", LabelType = "MENU", LabelKR = "제품정보관리", LabelEN = "Product Information", LabelCH = "产品信息管理", LabelJP = "製品情報管理" },
+            new SYS100_LABELS { LabelCode = "LBL_MATERIAL_INFO", LabelType = "MENU", LabelKR = "자재정보관리", LabelEN = "Material Information", LabelCH = "物料信息管理", LabelJP = "資材情報管理" },
+            new SYS100_LABELS { LabelCode = "LBL_TOOL_INFO", LabelType = "MENU", LabelKR = "공구정보관리", LabelEN = "Tool Information", LabelCH = "工具信息管理", LabelJP = "工具情報管理" },
+            new SYS100_LABELS { LabelCode = "LBL_SPARE_PARTS", LabelType = "MENU", LabelKR = "예비품정보관리", LabelEN = "Spare Parts Info", LabelCH = "备件信息管理", LabelJP = "予備品情報管理" },
+            new SYS100_LABELS { LabelCode = "LBL_DEV_HISTORY", LabelType = "MENU", LabelKR = "개발이력관리", LabelEN = "Development History", LabelCH = "开发履历管理", LabelJP = "開発履歴管理" },
+            new SYS100_LABELS { LabelCode = "LBL_DEFECT_RATE", LabelType = "MENU", LabelKR = "제품별불량률관리", LabelEN = "Defect Rate by Product", LabelCH = "产品不良率管理", LabelJP = "製品別不良率管理" },
+            new SYS100_LABELS { LabelCode = "LBL_INGOT_CONV", LabelType = "MENU", LabelKR = "인고트환산정보", LabelEN = "Ingot Conversion Info", LabelCH = "铸锭换算信息", LabelJP = "インゴット換算情報" },
             new SYS100_LABELS { LabelCode = "LBL_PROCESS_MGMT", LabelType = "MENU", LabelKR = "공정관리", LabelEN = "Process Management", LabelCH = "工序管理", LabelJP = "工程管理" },
             new SYS100_LABELS { LabelCode = "LBL_COMPANY_INFO", LabelType = "MENU", LabelKR = "거래처정보관리", LabelEN = "Company Information", LabelCH = "客户信息管理", LabelJP = "取引先情報管理" },
             new SYS100_LABELS { LabelCode = "LBL_EMPLOYEE_INFO", LabelType = "MENU", LabelKR = "인원정보관리", LabelEN = "Employee Information", LabelCH = "人员信息管理", LabelJP = "人員情報管理" },
@@ -282,6 +291,85 @@ public static class DbContextFactory
                 ParentMenuId = "M001",
                 MenuSeq = 2,
                 Description = "ItemInfo"
+            },
+
+            // 소메뉴 (Level 3) - 품목정보관리
+            new SYS200_MENUS
+            {
+                MenuId = "M001002001",
+                LabelCode = "제품정보관리",
+                ModType = "MES",
+                MenuType = "TPS008003",
+                DisplayYN = 0,
+                ParentMenuId = "M001002",
+                MenuSeq = 1,
+                Description = "MasterProduct"
+            },
+            new SYS200_MENUS
+            {
+                MenuId = "M001002002",
+                LabelCode = "자재정보관리",
+                ModType = "MES",
+                MenuType = "TPS008003",
+                DisplayYN = 0,
+                ParentMenuId = "M001002",
+                MenuSeq = 2,
+                Description = "MasterRawMaterial"
+            },
+            new SYS200_MENUS
+            {
+                MenuId = "M001002003",
+                LabelCode = "공구정보관리",
+                ModType = "MES",
+                MenuType = "TPS008003",
+                DisplayYN = 0,
+                ParentMenuId = "M001002",
+                MenuSeq = 3,
+                Description = "MasterTool"
+            },
+            new SYS200_MENUS
+            {
+                MenuId = "M001002004",
+                LabelCode = "예비품정보관리",
+                ModType = "MES",
+                MenuType = "TPS008003",
+                DisplayYN = 0,
+                ParentMenuId = "M001002",
+                MenuSeq = 4,
+                Description = "MasterProductTotal"
+            },
+            new SYS200_MENUS
+            {
+                MenuId = "M001002005",
+                LabelCode = "개발이력관리",
+                ModType = "MES",
+                MenuType = "TPS008003",
+                DisplayYN = 0,
+                ParentMenuId = "M001002",
+                MenuSeq = 5,
+                Description = "DevelopmentLog"
+            },
+            new SYS200_MENUS
+            {
+                MenuId = "M001002006",
+                LabelCode = "제품별불량률관리",
+                ModType = "MES",
+                MenuType = "TPS008003",
+                DisplayYN = 0,
+                ParentMenuId = "M001002",
+                MenuSeq = 6,
+                Description = "ProductDefectRate"
+            },
+            new SYS200_MENUS
+            {
+                MenuId = "M001002007",
+                LabelCode = "인고트환산정보",
+                ModType = "MES",
+                MenuType = "TPS008003",
+                DisplayYN = 0,
+                ParentMenuId = "M001002",
+                MenuSeq = 7,
+                Description = "IngotConversionInfo"
             },
             new SYS200_MENUS
             {

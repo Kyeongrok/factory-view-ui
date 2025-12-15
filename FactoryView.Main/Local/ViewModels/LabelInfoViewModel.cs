@@ -34,6 +34,9 @@ public partial class LabelInfoViewModel : ObservableObject
     {
         _dbContext = DbContextFactory.CreateSqliteContext();
         _labelInfoApi = new LabelInfoApi(_dbContext);
+
+        // 초기 데이터 로드
+        _ = SearchAsync();
     }
 
     [RelayCommand]

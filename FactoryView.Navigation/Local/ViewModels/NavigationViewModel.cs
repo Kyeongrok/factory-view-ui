@@ -29,6 +29,10 @@ public partial class NavigationViewModel : ObservableObject,
     [ObservableProperty]
     private ObservableCollection<MenuItem> _middleMenuList = new();
 
+    /// <summary>Sub Menu Bar (3 Depth)</summary>
+    [ObservableProperty]
+    private ObservableCollection<MenuItem> _subMenuList = new();
+
     /// <summary>Accordion Menu List</summary>
     [ObservableProperty]
     private ObservableCollection<MenuItem> _accordionMenuList = new();
@@ -209,6 +213,18 @@ public partial class NavigationViewModel : ObservableObject,
     private void MiddleMenuClick(MenuItem menu)
     {
         SelectedMiddleMenu = menu;
+        LoadSubMenu(menu);
+
+        // 자식이 없으면 바로 화면 열기
+        if (menu.Children.Count == 0)
+        {
+            MenuSelected?.Invoke(this, menu);
+        }
+    }
+
+    [RelayCommand]
+    private void SubMenuClick(MenuItem menu)
+    {
         MenuSelected?.Invoke(this, menu);
     }
 
@@ -217,6 +233,16 @@ public partial class NavigationViewModel : ObservableObject,
     {
         SelectedMiddleMenu = menu;
         MenuSelected?.Invoke(this, menu);
+    }
+
+    private void LoadSubMenu(MenuItem parentMenu)
+    {
+        SubMenuList.Clear();
+
+        foreach (var child in parentMenu.Children)
+        {
+            SubMenuList.Add(child);
+        }
     }
 
     /// <summary>

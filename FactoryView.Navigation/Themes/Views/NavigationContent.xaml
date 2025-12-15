@@ -27,41 +27,113 @@
                                                     <Setter Property="Padding" Value="10,8"/>
                                                 </Style>
                                             </Expander.Style>
-                                            <ItemsControl ItemsSource="{Binding Children}" Margin="20,5,0,0">
+                                            <!-- Level 2 메뉴 -->
+                                            <ItemsControl ItemsSource="{Binding Children}" Margin="15,5,0,0">
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate>
-                                                        <Button Content="{Binding MenuName}"
-                                                                Background="Transparent"
-                                                                Foreground="#B9C2D3"
-                                                                BorderThickness="0"
-                                                                HorizontalContentAlignment="Left"
-                                                                Padding="10,6"
-                                                                Cursor="Hand"
-                                                                Command="{Binding DataContext.AccordionMenuClickCommand, RelativeSource={RelativeSource AncestorType=views:NavigationContents}}"
-                                                                CommandParameter="{Binding}">
-                                                            <Button.Style>
-                                                                <Style TargetType="Button">
-                                                                    <Setter Property="Template">
-                                                                        <Setter.Value>
-                                                                            <ControlTemplate TargetType="Button">
-                                                                                <Border x:Name="border"
-                                                                                        Background="Transparent"
-                                                                                        Padding="{TemplateBinding Padding}"
-                                                                                        CornerRadius="3">
-                                                                                    <TextBlock Text="{TemplateBinding Content}"
-                                                                                               Foreground="#B9C2D3"/>
-                                                                                </Border>
-                                                                                <ControlTemplate.Triggers>
-                                                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                                                        <Setter TargetName="border" Property="Background" Value="#2A3F4D"/>
-                                                                                    </Trigger>
-                                                                                </ControlTemplate.Triggers>
-                                                                            </ControlTemplate>
-                                                                        </Setter.Value>
-                                                                    </Setter>
-                                                                </Style>
-                                                            </Button.Style>
-                                                        </Button>
+                                                        <StackPanel>
+                                                            <!-- Level 2: 자식이 있으면 Expander, 없으면 Button -->
+                                                            <Expander IsExpanded="False" Margin="0,2">
+                                                                <Expander.Style>
+                                                                    <Style TargetType="Expander">
+                                                                        <Setter Property="Background" Value="Transparent"/>
+                                                                        <Setter Property="Foreground" Value="#B9C2D3"/>
+                                                                        <Setter Property="BorderThickness" Value="0"/>
+                                                                        <Setter Property="Padding" Value="5,4"/>
+                                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                                        <Style.Triggers>
+                                                                            <DataTrigger Binding="{Binding Children.Count}" Value="0">
+                                                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                                                            </DataTrigger>
+                                                                        </Style.Triggers>
+                                                                    </Style>
+                                                                </Expander.Style>
+                                                                <Expander.Header>
+                                                                    <TextBlock Text="{Binding MenuName}"
+                                                                               Foreground="#B9C2D3"
+                                                                               FontSize="13"/>
+                                                                </Expander.Header>
+                                                                <!-- Level 3 메뉴 -->
+                                                                <ItemsControl ItemsSource="{Binding Children}" Margin="15,3,0,0">
+                                                                    <ItemsControl.ItemTemplate>
+                                                                        <DataTemplate>
+                                                                            <Button Content="{Binding MenuName}"
+                                                                                    Background="Transparent"
+                                                                                    Foreground="#8A9AAA"
+                                                                                    BorderThickness="0"
+                                                                                    HorizontalContentAlignment="Left"
+                                                                                    Padding="8,5"
+                                                                                    Cursor="Hand"
+                                                                                    Command="{Binding DataContext.AccordionMenuClickCommand, RelativeSource={RelativeSource AncestorType=views:NavigationContents}}"
+                                                                                    CommandParameter="{Binding}">
+                                                                                <Button.Style>
+                                                                                    <Style TargetType="Button">
+                                                                                        <Setter Property="Template">
+                                                                                            <Setter.Value>
+                                                                                                <ControlTemplate TargetType="Button">
+                                                                                                    <Border x:Name="border"
+                                                                                                            Background="Transparent"
+                                                                                                            Padding="{TemplateBinding Padding}"
+                                                                                                            CornerRadius="3">
+                                                                                                        <TextBlock Text="{TemplateBinding Content}"
+                                                                                                                   Foreground="#8A9AAA"
+                                                                                                                   FontSize="12"/>
+                                                                                                    </Border>
+                                                                                                    <ControlTemplate.Triggers>
+                                                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                                                            <Setter TargetName="border" Property="Background" Value="#2A3F4D"/>
+                                                                                                        </Trigger>
+                                                                                                    </ControlTemplate.Triggers>
+                                                                                                </ControlTemplate>
+                                                                                            </Setter.Value>
+                                                                                        </Setter>
+                                                                                    </Style>
+                                                                                </Button.Style>
+                                                                            </Button>
+                                                                        </DataTemplate>
+                                                                    </ItemsControl.ItemTemplate>
+                                                                </ItemsControl>
+                                                            </Expander>
+                                                            <!-- Level 2: 자식이 없으면 Button으로 표시 -->
+                                                            <Button Content="{Binding MenuName}"
+                                                                    Background="Transparent"
+                                                                    Foreground="#B9C2D3"
+                                                                    BorderThickness="0"
+                                                                    HorizontalContentAlignment="Left"
+                                                                    Padding="10,6"
+                                                                    Cursor="Hand"
+                                                                    Command="{Binding DataContext.AccordionMenuClickCommand, RelativeSource={RelativeSource AncestorType=views:NavigationContents}}"
+                                                                    CommandParameter="{Binding}">
+                                                                <Button.Style>
+                                                                    <Style TargetType="Button">
+                                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                                        <Setter Property="Template">
+                                                                            <Setter.Value>
+                                                                                <ControlTemplate TargetType="Button">
+                                                                                    <Border x:Name="border"
+                                                                                            Background="Transparent"
+                                                                                            Padding="{TemplateBinding Padding}"
+                                                                                            CornerRadius="3">
+                                                                                        <TextBlock Text="{TemplateBinding Content}"
+                                                                                                   Foreground="#B9C2D3"/>
+                                                                                    </Border>
+                                                                                    <ControlTemplate.Triggers>
+                                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                                            <Setter TargetName="border" Property="Background" Value="#2A3F4D"/>
+                                                                                        </Trigger>
+                                                                                    </ControlTemplate.Triggers>
+                                                                                </ControlTemplate>
+                                                                            </Setter.Value>
+                                                                        </Setter>
+                                                                        <Style.Triggers>
+                                                                            <DataTrigger Binding="{Binding Children.Count}" Value="0">
+                                                                                <Setter Property="Visibility" Value="Visible"/>
+                                                                            </DataTrigger>
+                                                                        </Style.Triggers>
+                                                                    </Style>
+                                                                </Button.Style>
+                                                            </Button>
+                                                        </StackPanel>
                                                     </DataTemplate>
                                                 </ItemsControl.ItemTemplate>
                                             </ItemsControl>

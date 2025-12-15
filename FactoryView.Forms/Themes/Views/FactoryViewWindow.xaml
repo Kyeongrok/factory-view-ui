@@ -23,36 +23,28 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <!-- Top Menu Bar -->
-                    <Border Grid.Row="0" Background="#1F303A">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <!-- Logo Area -->
-                            <based:LogoArea Grid.Column="0"
-                                            LogoText="FactoryView"
-                                            SettingsCommand="{Binding SettingsCommand}"
-                                            ToggleCommand="{Binding ToggleAccordionCommand}"/>
-
-                            <!-- Top Menu (1 Depth) -->
-                            <nav:TopMenuContent Grid.Column="1" HorizontalAlignment="Right"
-                                                DataContext="{Binding Navigation}"/>
-                        </Grid>
-                    </Border>
+                    <!-- Top Navigation Bar (Logo + Top Menu) -->
+                    <nav:TopNavigationBar Grid.Row="0"
+                                          LogoText="FactoryView"
+                                          SettingsCommand="{Binding SettingsCommand}"
+                                          ToggleCommand="{Binding ToggleAccordionCommand}"
+                                          NavigationDataContext="{Binding Navigation}"/>
 
                     <!-- Middle Menu Bar (2 Depth) -->
                     <nav:MiddleMenuContent Grid.Row="1"
                                            DataContext="{Binding Navigation}"/>
 
+                    <!-- Sub Menu Bar (3 Depth) -->
+                    <nav:SubMenuContent Grid.Row="2"
+                                        DataContext="{Binding Navigation}"/>
+
                     <!-- Main Content Area -->
-                    <Grid Grid.Row="2">
+                    <Grid Grid.Row="3">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="{Binding AccordionWidth}"/>
                             <ColumnDefinition Width="*"/>
@@ -67,7 +59,7 @@
                     </Grid>
 
                     <!-- Status Bar -->
-                    <Border Grid.Row="3" Background="#1F303A" Height="25">
+                    <Border Grid.Row="4" Background="#1F303A" Height="25">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>

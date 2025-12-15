@@ -2,9 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/FactoryView.Support;component/Themes/Generic.xaml"/>
         <ResourceDictionary Source="/FactoryView.Navigation;component/Themes/Views/TopMenuContent.xaml"/>
         <ResourceDictionary Source="/FactoryView.Navigation;component/Themes/Views/MiddleMenuContent.xaml"/>
+        <ResourceDictionary Source="/FactoryView.Navigation;component/Themes/Views/SubMenuContent.xaml"/>
         <ResourceDictionary Source="/FactoryView.Navigation;component/Themes/Views/NavigationContent.xaml"/>
+        <ResourceDictionary Source="/FactoryView.Navigation;component/Themes/Views/TopNavigationBar.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>
